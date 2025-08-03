@@ -1,6 +1,6 @@
 # The Infinite Money Machine: A Fuzzing Heist
 
-## *Complete Blueprint & Table of Contents*
+## *Corrected Blueprint & Table of Contents*
 
 ---
 
@@ -60,6 +60,11 @@ Your first glimpse of Castle Securities comes through their public investor port
 - **FFUF** - Fast directory and parameter discovery
 - **Custom wordlists** - Targeting financial industry terminology
 
+**Code Implementation Requirements:**
+- **Basic HTTP Directory Fuzzer** (30-40 lines): Implements systematic input generation, HTTP request execution, and response analysis loop
+- **Parameter Discovery Fuzzer** (40-50 lines): Tests GET/POST parameters with financial domain wordlists
+- **Response Pattern Analyzer** (25-35 lines): Identifies error messages, timing anomalies, and content length patterns indicating vulnerabilities
+
 **Throughlines:**
 - **Technical**: Establishes core fuzzing architecture by combining input generation, target execution, and crash analysis to produce vulnerability reports used by security teams
 - **Narrative**: Introduces the heist crew facing their first real challenge, setting up progression from basic reconnaissance to sophisticated attacks
@@ -117,6 +122,12 @@ With reconnaissance complete, it's time to get inside. Castle Securities' authen
 - **Hydra** - Multi-protocol brute force attacks
 - **Session analysis tools** - Token entropy and prediction testing
 
+**Code Implementation Requirements:**
+- **Dynamic Token Extractor** (35-45 lines): Automatically extracts CSRF tokens from login forms, manages token freshness across requests
+- **Username Enumeration Fuzzer** (40-50 lines): Tests username variations with timing and content analysis to identify valid accounts
+- **Password Policy Discovery Tool** (30-40 lines): Systematically tests password requirements through controlled variations
+- **Session Token Analyzer** (45-55 lines): Analyzes JWT structure, tests token manipulation, implements entropy analysis
+
 **Throughlines:**
 - **Technical**: Extends basic fuzzing by adding authentication-specific testing and session analysis to produce comprehensive identity security assessment
 - **Narrative**: Escalates from external reconnaissance to actual breach of perimeter defenses
@@ -158,70 +169,78 @@ This allows you to predict and hijack sessions belonging to quantitative researc
 
 ---
 
-### Chapter 3: Behind Enemy Lines - Network Protocol Infiltration
+### Chapter 3: Behind Enemy Lines - Basic Network Communication Testing
 *"They built walls around their data, but forgot about the secret passages."*
 
-Now that you're inside their perimeter, it's time to explore Castle Securities' internal network. Their trading systems communicate through custom protocols that were designed for speed, not security. Using network fuzzing techniques, you'll map their internal infrastructure and find pathways to their most sensitive systems.
+Now that you're inside their perimeter, it's time to explore Castle Securities' internal network. Their trading systems communicate through WebSocket connections that were designed for speed, not security. Using systematic message fuzzing techniques, you'll discover pathways to their most sensitive systems.
+
+**SCOPE CORRECTION**: This chapter focuses ONLY on WebSocket fuzzing - no binary protocol reverse engineering, service discovery manipulation, or network topology mapping. Those advanced techniques are beyond fuzzing fundamentals.
 
 **Learning Objectives:**
-- Intercept and analyze network traffic using standard tools
-- Build simple network fuzzers for common protocols (HTTP, WebSocket)
-- Test WebSocket connections for input validation issues
-- Identify authentication bypasses in network communications
-- Create basic payload generators for network protocols
-- Monitor application responses to malformed network data
-- Document network-level vulnerabilities effectively
+- Intercept and analyze WebSocket traffic using browser developer tools
+- Build systematic WebSocket message fuzzers with connection state management
+- Test WebSocket authentication and session persistence
+- Identify business logic vulnerabilities in real-time communication protocols
+- Create payload generators for JSON-based messaging protocols
+- Monitor application responses to malformed WebSocket messages
+- Document WebSocket-level vulnerabilities effectively
 
 **OWASP Top 10 Coverage:**
-- **A04: Insecure Design** - Protocol design flaws and business logic issues
-- **A05: Security Misconfiguration** - Network service misconfigurations
+- **A04: Insecure Design** - Protocol design flaws and business logic issues in real-time communications
+- **A05: Security Misconfiguration** - WebSocket service misconfigurations and exposed endpoints
 
 **Tools & Techniques:**
-- **Wireshark** - Network traffic analysis and capture
-- **Python Scapy** - Custom packet generation and manipulation
-- **WebSocket King** - WebSocket connection testing
-- **Burp Suite extensions** - Custom protocol testing
-- **netcat/telnet** - Basic network service interaction
+- **Browser Developer Tools** - WebSocket traffic analysis and manual testing
+- **Python websocket-client** - Custom WebSocket fuzzing scripts
+- **OWASP ZAP WebSocket support** - Automated WebSocket message testing
+- **Manual proxy tools** - Intercepting and modifying WebSocket traffic
+
+**Code Implementation Requirements:**
+- **WebSocket Connection Analyzer** (25-35 lines): Establishes WebSocket connections, captures message flow, analyzes JSON structure
+- **WebSocket Message Fuzzer** (40-50 lines): Generates systematic WebSocket message variations while maintaining persistent connections
+- **WebSocket State Manipulation Tool** (35-45 lines): Tests subscription management, concurrent operations, and authentication state
+- **Business Logic Bypass Tester** (30-40 lines): Tests WebSocket-specific business logic through message parameter manipulation
 
 **Throughlines:**
-- **Technical**: Extends web application testing by adding basic network protocol testing to produce comprehensive infrastructure assessment
-- **Narrative**: Moves beyond simple web interfaces to network communications, showing broader attack surface
-- **Methodological**: Develops practical approach to network protocol testing without complex tooling
+- **Technical**: Extends web application testing by adding real-time communication protocol testing to produce comprehensive communication security assessment
+- **Narrative**: Moves beyond simple web interfaces to live algorithm monitoring, showing real-time access to trading systems
+- **Methodological**: Develops practical approach to testing persistent connection protocols
 
 **Sections:**
-- Castle Communications: Network Traffic Analysis and Interception
-- Hidden Tunnels: WebSocket Fuzzing and Real-Time Communication Testing
-- Secret Languages: Simple Protocol Manipulation and Custom Data Testing
-- Guard Posts: Network-Level Authentication Bypass Techniques
-- Watchtowers: Basic Network Monitoring and Anomaly Detection
+- Castle Communications: WebSocket Traffic Analysis and Message Interception
+- Hidden Channels: WebSocket Message Structure and Fuzzing Fundamentals
+- Live Connections: Authentication and Session Management in Persistent Protocols
+- Real-Time Exploitation: Business Logic Testing Through WebSocket Message Manipulation
+- Monitoring the Machine: Gaining Access to Algorithm Performance Data
 
 **The Intelligence:**
-Network traffic analysis reveals that Castle Securities' algorithm development happens on an isolated subnet accessible only through a specific WebSocket API. The WebSocket traffic shows:
-1. Real-time market data feeds with minimal authentication
-2. Internal chat system used by ARGOS development team
-3. File synchronization protocol for algorithm updates
-4. Debug interfaces accidentally left enabled in production
+WebSocket traffic analysis reveals that Castle Securities' algorithm monitoring happens through real-time WebSocket connections. The message traffic shows:
+1. Live algorithm performance metrics with minimal authentication requirements
+2. Real-time trading data feeds using predictable message formats
+3. Administrative commands accessible through message parameter manipulation
+4. Debug interfaces accidentally left enabled in production WebSocket handlers
 
-You've found the gateway to the Infinite Money Machine development environment.
+You've found the gateway to live algorithm monitoring and control systems.
 
 **Target Networks:**
-- Internal trading networks with custom HTTP-based protocols
-- Real-time market data feeds using WebSocket with weak authentication tokens
-- WebSocket-based communication systems for algorithm development team collaboration
-- Legacy network services (telnet, FTP) with default credentials
+- Research portal WebSocket connections for real-time algorithm monitoring
+- Internal WebSocket APIs for trading system status and control
+- Administrative WebSocket channels with weak authentication
+- Real-time market data feeds using WebSocket with session token authentication
 
 **Technical Prerequisites:**
-- Basic networking concepts (IP addresses, ports, TCP/UDP)
-- Understanding of HTTP and WebSocket protocols
-- Basic command line network tools usage
+- Basic networking concepts (client-server communication, persistent connections)
+- Understanding of WebSocket protocol basics (connection upgrade, message framing)
+- JSON data format and structure manipulation
+- HTTP authentication and session management from Chapter 2
 
 **A09 Callout - Security Logging:**
-- **Network Monitoring**: How network anomalies appear in security tools
-- **Protocol Steganography**: Hiding malicious traffic in legitimate protocols
+- **WebSocket Monitoring**: How WebSocket anomalies appear in application logs
+- **Real-Time Detection**: Understanding monitoring of persistent connection abuse
 
 ---
 
-### Chapter 4: Digital Dead Drops - File Upload Exploitation
+### Chapter 4: Digital Dead Drops - File Upload and Processing Exploitation
 *"Sometimes the best way into a castle is to be invited as a trojan horse."*
 
 Castle Securities' researchers regularly upload documents, datasets, and algorithm code to shared systems. These file upload mechanisms become your pathway to persistence and deeper access. Through systematic testing of file handling systems, you'll plant your digital tools throughout their infrastructure while demonstrating two critical vulnerability classes.
@@ -231,9 +250,9 @@ Castle Securities' researchers regularly upload documents, datasets, and algorit
 - Exploit directory traversal vulnerabilities through filename manipulation
 - Bypass file type restrictions to upload executable scripts
 - Test MIME type validation and extension filtering bypasses
-- Create malformed files that trigger parsing errors
+- Use AFL++ for systematic binary file format fuzzing
 - Build automated file upload testing tools and payloads
-- Understand the security impact of unrestricted file uploads
+- Understand the security impact of file processing vulnerabilities
 
 **OWASP Top 10 Coverage:**
 - **A03: Injection** - Path injection through directory traversal
@@ -243,19 +262,25 @@ Castle Securities' researchers regularly upload documents, datasets, and algorit
 **Tools & Techniques:**
 - **FFUF** - File upload parameter fuzzing
 - **Python scripts** - Automated file generation and upload testing
+- **AFL++** - Coverage-guided binary file format fuzzing
 - **Burp Suite** - Manual upload manipulation and testing
-- **File format tools** - Creating polyglot and malformed files
+
+**Code Implementation Requirements:**
+- **Systematic Path Traversal Fuzzer** (35-45 lines): Generates comprehensive filename-based path traversal payloads with multiple encoding techniques
+- **File Type Bypass Fuzzer** (30-40 lines): Tests file extension and MIME type validation bypasses for script upload
+- **AFL++ GIF Fuzzer Setup** (40-50 lines): Implements AFL++ fuzzing harness for GIF comment parsing vulnerability
+- **Multi-Stage Upload Exploiter** (50-60 lines): Combines filename and content vulnerabilities for code execution
 
 **Throughlines:**
-- **Technical**: Extends web application testing by adding file-based attack vectors to produce comprehensive upload security assessment
+- **Technical**: Extends web application testing by adding file-based attack vectors and introduces binary fuzzing with AFL++
 - **Narrative**: Demonstrates how seemingly innocent file uploads become powerful attack vectors for persistence
-- **Methodological**: Establishes systematic approach to testing file upload security controls
+- **Methodological**: Establishes systematic approach to testing file upload security controls and binary format parsing
 
 **Sections:**
 - Trojan Horses: File Upload Security Analysis and Common Vulnerability Patterns
 - Escape Artists: Directory Traversal Through Malicious Filenames
 - Master of Disguise: Script Upload Attacks and File Type Restriction Bypasses
-- Shape Shifters: MIME Type and Extension Spoofing Techniques
+- Binary Bombs: AFL++ Fuzzing of GIF Processing Systems
 - Siege Weapons: Automated Upload Fuzzing and Systematic Test Suites
 
 **Target Focus: Castle Securities File Upload Vulnerabilities**
@@ -267,25 +292,25 @@ Castle Securities' researchers regularly upload documents, datasets, and algorit
 - Test different path separators for cross-platform attacks
 - Demonstrate writing files to web root for direct access
 
-**Bug #2: Malicious Script Upload**
-- Upload `.php`, `.jsp`, `.asp` files disguised as images
-- Bypass extension filtering with double extensions (`.php.jpg`)
-- MIME type spoofing attacks using Content-Type manipulation
-- Null byte injection in filenames (`script.php%00.jpg`)
-- Polyglot files that are both valid images AND executable scripts
+**Bug #2: GIF Comment Buffer Overflow (AFL++ Target)**
+- Castle Securities uses a custom avatar processing library (`avatar_parser.c`)
+- Classic `strcpy()` vulnerability in GIF comment parsing
+- Use AFL++ for coverage-guided discovery of the buffer overflow
+- Demonstrate both source code compilation fuzzing and binary-only QEMU mode
+- No exploit development - focus on systematic vulnerability discovery
 
 **The Payload:**
-You successfully upload a disguised web shell to their research document repository through multiple attack vectors:
+You successfully discover multiple file processing vulnerabilities:
 1. Directory traversal allows writing to the web root directory
-2. Script upload bypass enables execution of server-side code
-3. Combined, these provide persistent access to systems containing fragments of the ARGOS algorithm
+2. Script upload bypass enables execution of server-side code  
+3. AFL++ discovers buffer overflow in GIF comment parsing library
+4. Combined, these provide persistent access to systems containing fragments of the ARGOS algorithm
 
 **Target Systems:**
 - Research document upload portal with weak path validation
 - Employee file sharing system with directory traversal vulnerabilities
+- Avatar upload system using vulnerable GIF parsing library
 - Automated report generation system accepting malicious files
-- Version control system with executable file upload capabilities
-- Avatar upload system with insufficient file type validation
 
 **Practical Examples Students Will Learn:**
 ```
@@ -299,11 +324,15 @@ shell.php.jpg
 shell.php%00.jpg
 shell.php;.jpg
 Content-Type spoofing: image/jpeg while uploading .php
+
+# AFL++ GIF fuzzing
+afl-clang-fast avatar_parser.c -o avatar_parser
+afl-fuzz -i gif_samples -o findings ./avatar_parser @@
 ```
 
 **A09 Callout - Security Logging:**
 - **Upload Monitoring**: How malicious uploads appear in web application logs
-- **Forensic Artifacts**: File system evidence left by successful attacks
+- **Binary Fuzzing Evidence**: Understanding crash dump analysis and debugging artifacts
 
 ---
 
@@ -335,6 +364,12 @@ With persistent access established, you turn your attention to Castle Securities
 - **Python scripts** - Custom injection payload generation
 - **FFUF** - Parameter fuzzing for injection points discovery
 - **Database-specific tools** - MySQL, PostgreSQL, MSSQL testing
+
+**Code Implementation Requirements:**
+- **SQL Injection Parameter Fuzzer** (40-50 lines): Systematically tests parameters for SQL injection using error-based detection
+- **Blind SQL Injection Tool** (50-60 lines): Implements timing-based and boolean blind injection techniques
+- **Database Enumeration Fuzzer** (45-55 lines): Automates database fingerprinting and schema extraction
+- **Data Extraction Orchestrator** (55-65 lines): Combines multiple injection techniques for systematic data extraction
 
 **Throughlines:**
 - **Technical**: Extends payload generation by adding database-specific logic and automated exploitation to produce complete data extraction capabilities
@@ -374,7 +409,7 @@ The database contains fragments of the algorithm including training datasets, mo
 **Technical Prerequisites:**
 - **ESSENTIAL**: Basic SQL knowledge (SELECT, WHERE, INSERT, JOIN)
 - Understanding of database tables and relationships
-- HTTP parameter manipulation
+- HTTP parameter manipulation from previous chapters
 - Boolean logic concepts
 
 **A09 Callout - Security Logging:**
@@ -408,6 +443,12 @@ The Infinite Money Machine's most sensitive components exist only on the worksta
 - **XSStrike** - Advanced XSS detection and payload generation
 - **Python scripts** - Custom payload crafting and automation
 - **Browser developer tools** - Manual XSS testing and verification
+
+**Code Implementation Requirements:**
+- **Context-Aware XSS Payload Generator** (40-50 lines): Generates XSS payloads based on injection context (HTML, JavaScript, CSS, etc.)
+- **Polyglot XSS Fuzzer** (35-45 lines): Creates payloads that work across multiple injection contexts and browsers
+- **DOM XSS Discovery Tool** (45-55 lines): Analyzes client-side JavaScript for DOM-based XSS vulnerabilities
+- **XSS Exploitation Framework** (50-60 lines): Weaponizes discovered XSS for data extraction and session hijacking
 
 **Throughlines:**
 - **Technical**: Extends context-aware payload generation by adding browser-specific execution logic and CSP evasion to produce client-side attack platforms
@@ -477,6 +518,12 @@ Castle Securities' executives and researchers use mobile applications to monitor
 - **Postman/Insomnia** - Manual API testing and documentation
 - **Mobile proxy tools** - Intercepting mobile app traffic
 
+**Code Implementation Requirements:**
+- **API Discovery and Documentation Extractor** (35-45 lines): Automatically discovers API endpoints and extracts documentation/schemas
+- **Schema-Aware API Fuzzer** (45-55 lines): Tests REST and GraphQL APIs using discovered schemas for intelligent payload generation
+- **Business Logic Vulnerability Scanner** (40-50 lines): Tests API business rules and authorization logic through parameter manipulation
+- **API Authentication Bypass Tool** (35-45 lines): Systematically tests API authentication and session management vulnerabilities
+
 **Throughlines:**
 - **Technical**: Extends schema-aware fuzzing by adding API specification parsing and business logic testing to produce comprehensive API security assessment
 - **Narrative**: Adapts to modern application architectures, showing evolution of attack techniques
@@ -524,10 +571,12 @@ The mobile API reveals that the ARGOS algorithm operates in real-time, making th
 
 ## **PART III: THE FINAL ASSAULT (30% - ~70 pages)**
 
-### Chapter 8: Breaking the Quantum Vault - Binary Exploitation
+### Chapter 8: Breaking the Parser - Binary File Format Fuzzing
 *"The algorithm's core runs in the castle's most secure tower. Time to scale the walls."*
 
 The heart of the Infinite Money Machine runs on custom C++ software that processes market data at incredible speeds. This chapter focuses on using AFL++ to discover a deliberately planted buffer overflow in Castle Securities' custom avatar processing library - a realistic vulnerability that demonstrates binary fuzzing techniques without requiring exploit development expertise.
+
+**CORRECTED SCOPE**: This chapter teaches binary fuzzing fundamentals using AFL++ to find a simple buffer overflow in GIF comment parsing. No "quantum vault" complexity - just practical binary fuzzing education.
 
 **Learning Objectives:**
 - Set up AFL++ for both source code and binary fuzzing
@@ -547,18 +596,24 @@ The heart of the Infinite Money Machine runs on custom C++ software that process
 - **AddressSanitizer** - Memory error detection
 - **File format tools** - GIF manipulation and mutation
 
+**Code Implementation Requirements:**
+- **AFL++ Source Code Fuzzing Setup** (30-40 lines): Compiles vulnerable C code with AFL++ instrumentation and sets up fuzzing harness
+- **GIF Test Case Generator** (25-35 lines): Creates valid GIF files with systematically varied comment sections for fuzzing
+- **Crash Analysis Tool** (35-45 lines): Analyzes AFL++ crashes using GDB and AddressSanitizer to identify buffer overflows
+- **Binary Fuzzing Workflow** (40-50 lines): Complete workflow from compilation through fuzzing to crash reproduction
+
 **Throughlines:**
 - **Technical**: Extends web application fuzzing by adding binary component testing to produce comprehensive application security assessment including compiled dependencies
 - **Narrative**: Progresses from web interface testing to underlying system components, showing how deep vulnerabilities hide in seemingly safe libraries
 - **Methodological**: Demonstrates systematic approach to testing both source code and binary components
 
 **Sections:**
-- Tower Assault: Introduction to Binary and Source Code Fuzzing
-- Siege Equipment: Setting Up AFL++ for C/C++ Source Code
-- Battering Rams: Creating File Processing Test Harnesses
-- Secret Blueprints: GIF Format Basics and Mutation Strategies
-- Structural Weakness: Finding and Reproducing Stack Buffer Overflows
-- Attack Strategies: Binary vs Source Fuzzing - When to Use Each Approach
+- Binary Assault: Introduction to Binary and Source Code Fuzzing with AFL++
+- Siege Equipment: Setting Up AFL++ for C/C++ Source Code Compilation and Fuzzing
+- Battering Rams: Creating File Processing Test Harnesses for Systematic Testing
+- Format Fundamentals: GIF Format Basics and Comment Section Mutation Strategies
+- Structural Weakness: Finding and Reproducing Stack Buffer Overflows Through Fuzzing
+- Binary vs Source: Understanding When to Use Source Code vs Binary-Only Fuzzing
 
 **The Prize:**
 You successfully use AFL++ to discover a buffer overflow in Castle Securities' custom avatar processing library (`avatar_parser.c`). The vulnerability exists in GIF comment parsing where a classic `strcpy()` operation doesn't validate input length, leading to stack corruption.
@@ -629,6 +684,12 @@ The Infinite Money Machine is too complex for a single person to extract. You as
 - **Docker** - Consistent testing environments across team members
 - **Shared documentation** - Collaborative reporting and knowledge sharing
 - **Communication tools** - Secure team coordination methods
+
+**Code Implementation Requirements:**
+- **Team Fuzzing Orchestrator** (40-50 lines): Coordinates multiple fuzzing campaigns across team members with result aggregation
+- **Shared Result Collector** (35-45 lines): Implements basic deduplication and shared finding management
+- **Quality Control Framework** (30-40 lines): Establishes standards for validating fuzzing results across team members
+- **Collaborative Reporting System** (45-55 lines): Generates team-based security assessment reports
 
 **Throughlines:**
 - **Technical**: Extends individual fuzzing skills by adding basic team coordination tools to produce collaborative testing workflows
@@ -701,6 +762,12 @@ With the Infinite Money Machine in your possession, it's time to vanish without 
 - **Automation scripts** - Streamlined repetitive tasks
 - **Clean-up tools** - Evidence removal and operational security
 
+**Code Implementation Requirements:**
+- **Fuzzing Workflow Designer** (50-60 lines): Creates repeatable fuzzing workflows for different project types and targets
+- **Professional Report Generator** (45-55 lines): Converts technical fuzzing findings into business risk assessments
+- **Tool Integration Framework** (40-50 lines): Integrates fuzzing into existing security testing pipelines
+- **Quality Assurance System** (35-45 lines): Establishes standards for consistent and reliable fuzzing assessments
+
 **Throughlines:**
 - **Technical**: Synthesizes all previous techniques into practical workflows and reporting systems used by professional security testers
 - **Narrative**: Concludes the heist with professional mastery and preparation for real-world application
@@ -758,32 +825,37 @@ The Infinite Money Machine (ARGOS) now operates from secure servers around the w
 - **Python** - Custom exploit development, automation, and glue scripting
 - **SQLMap** - Database infiltration and automated data extraction
 
+**CORRECTED COUNT**: 5 core tools (not 6+ as previously inconsistent)
+
 ### **Supporting Tools (Minimal Additional Requirements)**
 - **Git** - Team collaboration and exploit/finding management
 - **Docker** - Consistent testing environments across team members
 - **Text editor/IDE** - Development environment for custom tools
-- **Basic network tools** - Wireshark, netcat, curl for protocol analysis
+- **Basic network tools** - Browser developer tools, curl for protocol analysis
+
+**SCOPE CLARIFICATION**: No Wireshark, no binary analysis suites, no complex network infrastructure required.
 
 ---
 
-## **THE TARGET: CASTLE SECURITIES' VULNERABLE EMPIRE**
+## **THE TARGET: CASTLE SECURITIES' PROGRESSIVE APPLICATION STACK**
 
-### **Single Application with Multiple Access Points:**
-**Castle Securities Complete Infrastructure (FastAPI-based)**
+### **Single Application with Realistic Complexity Growth:**
+**Castle Securities Research Portal (FastAPI-based)**
+
+**CORRECTED SCOPE**: One main application that realistically grows in complexity as chapters progress, not a complete enterprise infrastructure.
 
 **Public Layer (Chapters 1-2):**
 - Investor portal with hidden admin interfaces
 - Authentication systems with session management flaws
 - Employee login portals with weak credential policies
 
-**Internal Network (Chapter 3):**
-- WebSocket-based real-time communication systems
-- Custom HTTP protocols for internal services
-- Legacy network services with default credentials
+**Authenticated Layer (Chapter 3):**
+- WebSocket-based real-time communication systems for algorithm monitoring
+- Internal research portal with authenticated user content areas
 
-**File Processing (Chapter 4):**
+**File Processing Layer (Chapter 4):**
 - Document upload systems with path traversal vulnerabilities
-- Avatar processing with script upload bypasses
+- Avatar processing with GIF parsing buffer overflow (AFL++ target)
 - File sharing platforms with validation weaknesses
 
 **Database Layer (Chapter 5):**
@@ -791,22 +863,21 @@ The Infinite Money Machine (ARGOS) now operates from secure servers around the w
 - Research database containing ARGOS algorithm fragments
 - Employee credential database for lateral movement
 
-**Client Systems (Chapter 6):**
+**Client Integration (Chapter 6):**
 - Internal research portals with XSS vulnerabilities
 - Employee communication systems with stored XSS
 - Administrative dashboards with DOM-based XSS
 
-**API Infrastructure (Chapter 7):**
+**API Layer (Chapter 7):**
 - REST APIs with authorization bypass vulnerabilities
 - GraphQL endpoints with excessive data exposure
 - Mobile app APIs with business logic flaws
 
 **Binary Components (Chapter 8):**
 - Custom C++ avatar processing library with buffer overflow
-- High-frequency trading engine with memory corruption bugs
-- Market data processing utilities with parsing vulnerabilities
+- GIF comment parsing vulnerability discoverable through AFL++
 
-**Team Infrastructure (Chapters 9-10):**
+**Professional Integration (Chapters 9-10):**
 - Collaborative testing environments and result sharing
 - Professional reporting and documentation systems
 - Evidence removal and operational security procedures
@@ -821,6 +892,7 @@ The Infinite Money Machine (ARGOS) now operates from secure servers around the w
 
 **A02: Cryptographic Failures** ❌ 
 - *Intentionally out of scope* - Fuzzing not the primary testing method for cryptographic implementations
+- **CORRECTION**: JWT manipulation in Chapter 2 is included but focuses on logic flaws, not cryptographic analysis
 
 **A03: Injection** ✅ 
 - Chapter 2: Authentication injection and parameter manipulation
@@ -829,7 +901,7 @@ The Infinite Money Machine (ARGOS) now operates from secure servers around the w
 - Chapter 6: Cross-Site Scripting (XSS) in all forms
 
 **A04: Insecure Design** ✅
-- Chapter 3: Protocol design flaws and business logic issues
+- Chapter 3: WebSocket protocol design flaws and business logic issues
 - Chapter 7: API business logic vulnerabilities and design weaknesses
 
 **A05: Security Misconfiguration** ✅
@@ -868,42 +940,42 @@ The Infinite Money Machine (ARGOS) now operates from secure servers around the w
 - Web application fundamentals and authentication
 
 **Intermediate Level (Chapters 3-5):**
-- Network protocol basics and traffic analysis
+- WebSocket protocol basics (no complex network analysis)
 - File system concepts and upload mechanisms
 - **Essential SQL knowledge** (SELECT, WHERE, INSERT, JOIN)
 
 **Advanced Level (Chapters 6-8):**
 - **Essential HTML/JavaScript** for XSS understanding
 - JSON and REST API concepts
-- Basic understanding of program crashes and memory concepts
+- Basic understanding of program crashes and memory concepts (no assembly required)
 
 **Professional Level (Chapters 9-10):**
 - Git version control and team collaboration
 - Professional communication and reporting
 - Project management and quality assurance
 
-### **Technical Callouts Covered Throughout**
+### **CORRECTED Technical Callouts**
 - HTTP request/response structure and manipulation
-- URL encoding and payload crafting techniques
+- WebSocket connection management and message format testing
 - File upload mechanisms and security bypass methods
 - Database query construction and injection principles
 - Client-side script execution and browser security model
 - API authentication and authorization testing
-- Memory corruption concepts and binary analysis basics
+- Binary fuzzing basics using AFL++ (no reverse engineering)
 - Team coordination and professional security testing practices
 
 ### **Reality Check Notes for Instructors**
-- **Chapter 3**: Focus on practical network testing, not advanced protocol reverse engineering
-- **Chapter 4**: Basic file upload testing, not complex format analysis or malware creation
-- **Chapter 8**: Finding crashes with AFL++, not building working exploits or shellcode
-- **Chapters 9-10**: Practical coordination and workflow, not enterprise infrastructure development
+- **Chapter 3**: Focus on WebSocket testing only, not advanced network protocol analysis
+- **Chapter 4**: GIF parsing with AFL++, not complex format analysis
+- **Chapter 8**: Finding crashes with AFL++, not building working exploits
+- **Chapters 9-10**: Practical coordination and workflow, not enterprise infrastructure
 
 ---
 
-## **BUDGET-FRIENDLY IMPLEMENTATION STRATEGY**
+## **CORRECTED IMPLEMENTATION STRATEGY**
 
 ### **Single Application Architecture Benefits**
-**Castle Securities Portal** serves as the complete learning laboratory:
+**Castle Securities Research Portal** serves as the complete learning laboratory:
 - **Cost-effective**: One application to build, maintain, and support
 - **Scalable complexity**: Simple endpoints in early chapters, advanced features later
 - **Realistic**: Mirrors real-world applications with multiple vulnerability types
@@ -911,12 +983,12 @@ The Infinite Money Machine (ARGOS) now operates from secure servers around the w
 
 ### **Progressive Skill Building Through Narrative**
 - **Chapters 1-2**: Basic web fuzzing on simple endpoints with engaging story context
-- **Chapters 3-4**: Advanced techniques on same application's deeper layers
+- **Chapters 3-4**: WebSocket and file processing on same application's deeper layers
 - **Chapters 5-7**: Specialized attacks on specific endpoint vulnerabilities
-- **Chapters 8-10**: Professional techniques and team coordination
+- **Chapters 8-10**: Binary fuzzing and professional techniques
 
 ### **Minimal Tool Requirements for Global Accessibility**
-- **5 core tools** cover all techniques (no tool sprawl or expensive licenses)
+- **5 core tools** cover all techniques (OWASP ZAP, FFUF, AFL++, Python, SQLMap)
 - **Free/open source** ensures accessibility in all markets and economic conditions
 - **Well-documented** tools with strong community support and learning resources
 - **Cross-platform** compatibility for diverse student environments worldwide
@@ -927,11 +999,65 @@ The Infinite Money Machine (ARGOS) now operates from secure servers around the w
 - **Transferable skills** that apply to any target application or environment
 - **Professional practices** suitable for immediate application in enterprise environments
 
-### **Market Positioning for $10 Price Point**
-- **High value-to-cost ratio**: Professional-grade education at textbook prices
-- **Immediate applicability**: Skills transfer directly to job market demands
-- **Entertainment value**: Thriller narrative maintains engagement throughout technical content
-- **Community building**: Shared narrative creates discussion and word-of-mouth marketing
+---
+
+## **CODE PLACEHOLDER IMPLEMENTATION GUIDELINES**
+
+### **Each Code Section Must Include:**
+
+**1. Clear Learning Objective**
+- Specific fuzzing principle being demonstrated
+- How this builds on previous chapters
+- Expected skill gain from implementation
+
+**2. Technical Prerequisites Check**
+- Required knowledge from previous chapters
+- Essential background concepts
+- Skills verification before proceeding
+
+**3. Implementation Requirements**
+- Exact line count and complexity level
+- Required functionality and features
+- Integration points with other tools
+
+**4. Success Criteria**
+- Expected output and behavior
+- Common errors and troubleshooting
+- Validation that implementation works
+
+**5. Extension Opportunities**
+- How to modify for different targets
+- Additional features to explore
+- Connection to subsequent chapters
+
+### **Code Quality Standards**
+- **Fuzzing-focused**: Every example demonstrates core fuzzing principles
+- **Educational first**: Clarity over performance
+- **Progressive complexity**: Each chapter builds systematically
+- **Professional practices**: Error handling, documentation, integration
+- **Reproducible results**: Consistent output across environments
+
+---
+
+## **CHAPTER REVISION PRIORITIES**
+
+### **High Priority Corrections:**
+1. **Chapter 3**: Remove binary protocol analysis, focus only on WebSocket fuzzing
+2. **Chapter 8**: Correct title from "Quantum Vault" to "Parser Fuzzing" 
+3. **Tool count**: Consistently state 5 core tools throughout
+4. **Target scope**: Clarify that it's one application with growing complexity, not multiple systems
+
+### **Medium Priority Enhancements:**
+1. **Prerequisites**: More explicit skill requirements for each chapter
+2. **Code specifications**: Detailed implementation requirements for each placeholder
+3. **Integration**: Better chapter-to-chapter progression and connection
+4. **Professional context**: More emphasis on business impact and real-world application
+
+### **Low Priority Refinements:**
+1. **Narrative consistency**: Ensure story elements support rather than distract from learning
+2. **Tool integration**: Better workflow between different fuzzing tools
+3. **Quality control**: Enhanced validation and false positive filtering
+4. **Documentation**: Professional reporting and knowledge transfer
 
 ---
 
