@@ -1,4 +1,4 @@
-= Book Title
+= Fuzz Testing: The Infinite Money Machine Heist
 :doctype: book
 :toc: left
 :toclevels: 2
