@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Set output file name
+OUTPUT_FILE="book.pdf"
+
+# Render book as PDF
+if asciidoctor-pdf book.adoc; then
+  echo "PDF generated successfully: $OUTPUT_FILE"
+else
+  echo "Error generating PDF"
+  exit 1
+fi

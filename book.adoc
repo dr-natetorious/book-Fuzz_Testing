@@ -1,0 +1,16 @@
+= Book Title
+:doctype: book
+:toc: left
+:toclevels: 2
+
+// Include chapters
+include::Chapters/1_Intro.adoc[leveloffset=+1]
+include::Chapters/2_Auth.adoc[leveloffset=+1]
+include::Chapters/3_Protocol.adoc[leveloffset=+1]
+include::Chapters/4_Upload.adoc[leveloffset=+1]
+include::Chapters/5_SQL.adoc[leveloffset=+1]
+include::Chapters/6_Client.adoc[leveloffset=+1]
+include::Chapters/7_Mobile.adoc[leveloffset=+1]
+include::Chapters/8_Binary.adoc[leveloffset=+1]
+include::Chapters/9_Team.adoc[leveloffset=+1]
+include::Chapters/10_Conclusion.adoc[leveloffset=+1]
