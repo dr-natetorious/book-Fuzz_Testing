@@ -1,0 +1,16 @@
+= Fuzz Testing: The Infinite Money Machine Heist
+:doctype: book
+:toc: left
+:toclevels: 2
+
+// Include chapters
+include::1_Intro.adoc[leveloffset=+1]
+include::2_Auth.adoc[leveloffset=+1]
+include::3_Protocol.adoc[leveloffset=+1]
+include::4_Upload.adoc[leveloffset=+1]
+include::5_SQL.adoc[leveloffset=+1]
+include::6_Client.adoc[leveloffset=+1]
+include::7_Mobile.adoc[leveloffset=+1]
+include::8_Binary.adoc[leveloffset=+1]
+include::9_Team.adoc[leveloffset=+1]
+include::10_Conclusion.adoc[leveloffset=+1]
