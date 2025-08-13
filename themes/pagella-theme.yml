@@ -1,0 +1,170 @@
+extends: default
+
+font:
+  catalog:
+    # Use Noto Serif as high-quality Palatino substitute
+    # This provides excellent readability and professional appearance
+    Pagella:
+      normal: notoserif-regular-subset.ttf
+      bold: notoserif-bold-subset.ttf
+      italic: notoserif-italic-subset.ttf
+      bold_italic: notoserif-bold_italic-subset.ttf
+    # Monospace fonts for code blocks  
+    Mono:
+      normal: mplus1mn-regular-subset.ttf
+      bold: mplus1mn-bold-subset.ttf
+      italic: mplus1mn-italic-subset.ttf
+      bold_italic: mplus1mn-bold_italic-subset.ttf
+
+# Page settings - Professional book layout
+page:
+  margin: [0.75in, 1in, 0.75in, 1in]
+  size: letter
+
+# Base font settings - Your specifications
+base:
+  font_family: Pagella
+  font_size: 11
+  line_height: 1.15
+
+# Title page styling
+title_page:
+  title:
+    font_family: Pagella
+    font_size: 40
+    font_style: bold
+    line_height: 1.2
+    margin_bottom: 30
+
+# Heading hierarchy - Your exact specifications
+heading:
+  # Document title (= Chapter 1: Title) - 40pt bold right aligned
+  title:
+    font_family: Pagella
+    font_size: 40
+    font_style: bold
+    line_height: 1.2
+    text_align: right
+    margin_top: 0
+    margin_bottom: 30
+    
+  # H1 level (single = in included files) - Chapter titles - 40pt bold right aligned
+  h1:
+    font_family: Pagella
+    font_size: 40
+    font_style: bold
+    line_height: 1.2
+    text_align: right
+    margin_top: 0
+    margin_bottom: 30
+    
+  # Chapter titles (equivalent to your Chapter Number specification)
+  chapter:
+    font_family: Pagella
+    font_size: 35
+    font_style: bold
+    line_height: 1.2
+    margin_top: 0
+    margin_bottom: 24
+    
+  # H2 sections (== in chapter files) - 20pt bold
+  h2:
+    font_family: Pagella
+    font_size: 20
+    font_style: bold
+    line_height: 1.2
+    margin_top: 18
+    margin_bottom: 12
+    
+  # H3 sections (=== in chapter files) - 18pt bold
+  h3:
+    font_family: Pagella
+    font_size: 18
+    font_style: bold
+    line_height: 1.2
+    margin_top: 16
+    margin_bottom: 10
+    
+  # H4 sections (==== in chapter files) - 16pt bold
+  h4:
+    font_family: Pagella
+    font_size: 16
+    font_style: bold
+    line_height: 1.2
+    margin_top: 14
+    margin_bottom: 8
+    
+  h5:
+    font_family: Pagella
+    font_size: 14
+    font_style: bold
+    line_height: 1.2
+    margin_top: 12
+    margin_bottom: 6
+    
+  h6:
+    font_family: Pagella
+    font_size: 12
+    font_style: bold
+    line_height: 1.2
+    margin_top: 10
+    margin_bottom: 4
+
+# Code blocks - 10pt Consolas equivalent
+code:
+  font_family: Mono
+  font_size: 10
+  line_height: 1.2
+  background_color: f5f5f5
+  border_color: cccccc
+  border_width: 0.5
+  padding: [6, 8, 6, 8]
+
+# Inline code
+codespan:
+  font_family: Mono
+  font_size: 10
+  background_color: f5f5f5
+  padding: [1, 3, 1, 3]
+
+# Figure and Table captions - 9pt Palatino Linotype
+caption:
+  font_family: Pagella
+  font_size: 9
+  font_style: italic
+  line_height: 1.1
+  margin_top: 6
+  margin_bottom: 6
+  align: center
+
+# Table styling
+table:
+  caption:
+    font_family: Pagella
+    font_size: 9
+    font_style: italic
+    line_height: 1.1
+    margin_top: 6
+    margin_bottom: 6
+
+# Table of contents
+toc:
+  font_family: Pagella
+  font_size: 11
+  line_height: 1.15
+  
+# List styling
+list:
+  font_family: Pagella
+  font_size: 11
+  line_height: 1.15
+
+# Quote styling  
+quote:
+  font_family: Pagella
+  font_size: 11
+  font_style: italic
+  line_height: 1.15
+  border_left_color: cccccc
+  border_left_width: 4
+  padding_left: 12

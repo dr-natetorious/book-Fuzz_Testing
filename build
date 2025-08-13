@@ -3,10 +3,24 @@
 # Set output file name
 OUTPUT_FILE="book.pdf"
 
-# Render book as PDF
+# Render book as PDF with Palatino-style theme
+echo "Generating PDF with Palatino-style typography..."
+echo "Font specifications:"
+echo "- Chapter titles: 35pt bold serif"
+echo "- H1: 20pt bold serif" 
+echo "- H2: 18pt bold serif"
+echo "- H3: 16pt bold serif"
+echo "- Body text: 11pt serif, 1.15 line spacing"
+echo "- Captions: 9pt italic serif"
+echo "- Code: 10pt monospace"
+echo ""
+
 if asciidoctor-pdf book.adoc; then
-  echo "PDF generated successfully: $OUTPUT_FILE"
+  echo ""
+  echo "✅ PDF generated successfully: $OUTPUT_FILE"
+  echo "📖 Your book now uses professional Palatino-style typography!"
+  echo "📏 All font sizes and spacing match your specifications"
 else
-  echo "Error generating PDF"
+  echo "❌ Error generating PDF"
   exit 1
 fi

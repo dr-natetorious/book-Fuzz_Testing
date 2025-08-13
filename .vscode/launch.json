@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "name": "Python Debugger: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/bookgen/app.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/src/bookgen",
+            "args": [
+                "--model", "microsoft/DialoGPT-medium",
+                "--outline", "outline.md", 
+                "--chapter", "Chapters/1_Introduction.md",
+                "--number", "1",
+                "--instruction", "instructions.md",
+                "--evaluate", "Focus on clarity and engagement",
+                "--branch"
+            ]
+        }
+    ]
+}
