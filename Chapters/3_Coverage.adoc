@@ -1,5 +1,6 @@
-= Chapter 3: Discover Logic and Performance Failures
 :pp: {plus}{plus}
+
+== Chapter 3: Discover Logic and Performance Failures
 
 *Tool Requirements:* Performance profiling tools, libFuzzer with custom harnesses, Docker, monitoring tools
 
@@ -12,7 +13,7 @@
 
 '''
 
-== The Silent Killers of Service Reliability
+=== The Silent Killers of Service Reliability
 
 You've mastered crash discovery through AFL{pp} and libFuzzer. Your containers are humming along, finding memory corruption bugs that would have taken down your services. But here's the thing--some of the most devastating production failures never generate a single crash dump.
 
@@ -26,7 +27,7 @@ These failures are particularly insidious because they often develop gradually. 
 
 The techniques you'll learn in this chapter extend your reliability testing beyond the crash-and-burn scenarios into the subtle territory where services fail gracefully but catastrophically. You'll build harnesses that monitor CPU consumption in real-time, detect memory growth patterns that indicate resource leaks, and identify logic errors that corrupt data without triggering obvious failure modes.
 
-== Regular Expression Denial of Service: Extending Your libFuzzer Arsenal
+=== Regular Expression Denial of Service: Extending Your libFuzzer Arsenal
 
 Your libFuzzer harnesses from Chapter 2 excel at finding input processing crashes. Now you'll extend them to catch something more subtle: regexes that consume exponential CPU time.
 
@@ -34,7 +35,7 @@ ReDoS isn't theoretical.
 
 Stack Overflow was taken down by a single malformed post that triggered catastrophic backtracking in their regex engine. The fix? A 30-character input limit. One line of code preventing exponential CPU consumption.
 
-=== Your 30-Minute ReDoS Discovery Setup
+==== Your 30-Minute ReDoS Discovery Setup
 
 Build this on your existing libFuzzer infrastructure from Chapter 2. Same Docker containers. Same compilation flags. Just add CPU monitoring.
 
@@ -44,7 +45,7 @@ Your harness measures CPU time per regex operation. When execution time exceeds 
 
 Most ReDoS vulnerabilities emerge from regex patterns with nested quantifiers. Your fuzzer will automatically discover the specific input patterns that trigger exponential behavior in your application's actual regex patterns.
 
-=== Building ReDoS Detection Harnesses
+==== Building ReDoS Detection Harnesses
 
 Your fuzzing approach to ReDoS discovery leverages libFuzzer's systematic input generation combined with real-time performance monitoring. Unlike crash discovery, where you know immediately when you've found a problem, ReDoS detection requires measuring execution time and CPU consumption during regex evaluation.
 
@@ -56,7 +57,7 @@ Start by identifying the regex patterns in your application that process user-co
 
 Your monitoring approach needs to account for the difference between wall-clock time and CPU time. A regex might appear slow because your system is under load, but true ReDoS vulnerabilities consume actual CPU cycles in exponential quantities. Use process-specific CPU time measurements rather than simple elapsed time to avoid false positives.
 
-=== Email Validation: Your First ReDoS Target
+==== Email Validation: Your First ReDoS Target
 
 Grab the email validation regex from your application. Copy it into a libFuzzer harness. Run for 15 minutes.
 
@@ -76,7 +77,7 @@ Remember: You're not looking for crashes. You're measuring CPU time and flagging
 
 You now have working ReDoS detection running in your Docker environment, extending the libFuzzer techniques from Chapter 2 with CPU monitoring. Email validation testing typically finds ReDoS vulnerabilities within 15 minutes when they exist. The same systematic approach applies to any regex that processes user input.
 
-=== URL Parsing: Scaling Your ReDoS Detection
+==== URL Parsing: Scaling Your ReDoS Detection
 
 Your email validation ReDoS fuzzer proves the technique works. Now scale it to URL parsing--another regex-heavy area where exponential backtracking hides in complex validation patterns.
 
@@ -92,11 +93,11 @@ The mutation strategy differs from email fuzzing. URLs have hierarchical structu
 
 Most URL ReDoS vulnerabilities emerge from path processing patterns that use nested quantifiers to handle directory structures. Input like `/a/a/a/a/a/a/a/a/X` can trigger exponential behavior in poorly constructed path validation expressions.
 
-== Resource Monitoring: Extending Performance Detection to Memory Exhaustion
+=== Resource Monitoring: Extending Performance Detection to Memory Exhaustion
 
 Your performance monitoring harnesses detect CPU exhaustion during input processing. Now extend the same monitoring pattern to memory consumption--building your comprehensive reliability detection capability systematically.
 
-=== Progressive Monitoring Expansion
+==== Progressive Monitoring Expansion
 
 The pattern builds naturally from performance monitoring:
 
@@ -115,7 +116,7 @@ Your harnesses now monitor three failure conditions simultaneously:
 
 The exploration strategy remains unchanged: systematic input generation guided by coverage feedback. The monitoring scope expands to catch broader reliability failure patterns.
 
-=== Memory Exhaustion in JSON Processing
+==== Memory Exhaustion in JSON Processing
 
 JSON parsing demonstrates memory exhaustion patterns clearly because deeply nested objects can trigger exponential memory allocation during parsing tree construction.
 
@@ -127,7 +128,7 @@ Start with legitimate JSON as seeds: actual API payloads your application proces
 
 The monitoring detects when memory consumption grows disproportionately to input size--indicating potential exhaustion vulnerabilities. Same detection principle as performance monitoring, applied to resource consumption.
 
-=== Extending to Caching and Session Systems
+==== Extending to Caching and Session Systems
 
 Caching systems and session storage exhibit different memory exhaustion patterns: gradual accumulation over time rather than immediate spikes. Your monitoring extension adapts to catch these slower patterns.
 
@@ -139,7 +140,7 @@ Monitor memory trends over time. Healthy caches stabilize at steady-state consum
 
 Your systematic approach now covers immediate failures (crashes), performance failures (CPU exhaustion), and resource failures (memory exhaustion) through unified monitoring expansion.
 
-=== File and Network Resource Management
+==== File and Network Resource Management
 
 File descriptors, network connections, and temporary files represent finite system resources that require careful management. Applications that process user input often create temporary files, establish database connections, or open network sockets as part of their normal operation. Failures in resource cleanup can lead to resource exhaustion that affects not just your application but the entire system.
 
@@ -153,11 +154,11 @@ Your fuzzing approach should generate input sequences that stress resource lifec
 
 Monitor system-level resource usage during fuzzing campaigns: file descriptor counts, active network connections, temporary file accumulation, and disk space consumption. These metrics often provide early warning of resource management failures before they cause complete service failure.
 
-== Logic Validation: Integrating Monitoring into Correctness Verification
+=== Logic Validation: Integrating Monitoring into Correctness Verification
 
 Your monitoring extensions detect crashes, CPU exhaustion, and memory exhaustion. Now integrate these capabilities into the most comprehensive reliability testing: validating that your application produces correct results under all input conditions.
 
-=== Unified Reliability Validation
+==== Unified Reliability Validation
 
 Logic validation combines all previous monitoring techniques into comprehensive correctness testing:
 
@@ -174,7 +175,7 @@ Your harnesses now verify complete reliability: input processing that succeeds w
 
 This comprehensive approach catches reliability failures that partial testing misses: business logic that works under normal conditions but breaks under resource pressure, state transitions that succeed when CPU is available but fail under load.
 
-=== State Machine Logic Under Resource Pressure
+==== State Machine Logic Under Resource Pressure
 
 Business logic often behaves differently under resource constraints. State transitions that work with adequate CPU and memory may violate business rules when systems are stressed.
 
@@ -188,7 +189,7 @@ The critical insight: business logic bugs often emerge only when systems are str
 
 Your unified monitoring catches these correlation failures: state transitions that violate business rules specifically when resource consumption spikes.
 
-=== Financial Logic Under Performance Constraints
+==== Financial Logic Under Performance Constraints
 
 Financial calculations require absolute correctness regardless of system performance. Mathematical properties must hold even when systems are under resource pressure.
 
@@ -205,7 +206,7 @@ Generate edge cases that stress both logic and resources: large monetary amounts
 
 Your unified monitoring ensures financial correctness isn't compromised by system stress--catching the correlation failures where business logic breaks specifically under resource pressure.
 
-=== Authorization Logic Under System Stress
+==== Authorization Logic Under System Stress
 
 Authorization decisions must remain correct regardless of system performance. Security policies can't be compromised when systems are under load.
 
@@ -215,7 +216,7 @@ The goal: prove that authorization logic maintains security properties under all
 
 Your systematic exploration with unified monitoring provides comprehensive reliability verification: business logic that handles crashes gracefully, completes within acceptable time, consumes reasonable resources, and produces correct results under all conditions.
 
-=== Data Validation Logic: Finding the Bypass Bugs
+==== Data Validation Logic: Finding the Bypass Bugs
 
 Your state machine fuzzer validates workflow logic. Now extend the same approach to data validation--the rules that prevent invalid data from corrupting your service.
 
@@ -235,7 +236,7 @@ The key insight: validation failures often emerge at the boundaries between diff
 
 Generate test cases that specifically target these boundary conditions using the same systematic exploration approach from your crash detection work in Chapters 1 and 2.
 
-=== Business Rule Enforcement and Authorization
+==== Business Rule Enforcement and Authorization
 
 Authorization and business rule enforcement systems must correctly implement complex policies that determine what operations users can perform under what circumstances. These systems often contain intricate logic that considers user roles, resource ownership, time-based restrictions, and contextual factors.
 
@@ -247,11 +248,11 @@ Your fuzzing approach should generate authorization test scenarios that stress p
 
 Focus on edge cases where multiple authorization rules interact: users with overlapping roles, resources with complex ownership hierarchies, and time-based restrictions that might create windows of unauthorized access. These complex scenarios often expose logic bugs that simple authorization tests miss.
 
-== Resource Management and Connection Handling
+=== Resource Management and Connection Handling
 
 Modern applications depend heavily on external resources: database connections, message queues, external API services, and distributed caches. Each of these dependencies represents a potential point of failure where resource management bugs can cause service degradation or complete outages.
 
-=== Connection Pool Exhaustion
+==== Connection Pool Exhaustion
 
 Database connection pools provide a classic example of resource management that can fail under adversarial conditions. Applications typically maintain a fixed number of database connections to balance performance with resource consumption. Under normal conditions, connections are borrowed from the pool for brief operations then returned for reuse.
 
@@ -265,7 +266,7 @@ Your fuzzing strategy should generate operation sequences that stress connection
 
 Monitor connection pool metrics during fuzzing campaigns: active connections, queued requests, connection establishment failures, and connection lifetime statistics. These metrics often provide early warning of connection management issues before they cause complete service failure.
 
-=== Message Queue and Event Processing
+==== Message Queue and Event Processing
 
 Distributed applications often use message queues and event processing systems to handle asynchronous operations and inter-service communication. These systems typically implement sophisticated resource management policies to handle message acknowledgment, retry logic, and dead letter processing.
 
@@ -277,7 +278,7 @@ Your fuzzing approach should generate message sequences that stress event proces
 
 Focus particularly on error handling and retry logic. Message processing systems often implement complex policies for handling failed messages, including exponential backoff, dead letter queues, and circuit breaker patterns. Bugs in these systems can cause resource exhaustion when error conditions prevent proper message cleanup.
 
-=== External Service Integration
+==== External Service Integration
 
 Modern applications integrate with numerous external services: payment processors, authentication providers, content delivery networks, and third-party APIs. Each integration represents a potential source of resource management failures when the external service becomes unavailable or responds with unexpected error conditions.
 
@@ -293,11 +294,11 @@ Your logic failure detection now covers state machine validation and data valida
 
 Time to integrate everything with production monitoring.
 
-== Production Integration: Docker-Native Reliability Monitoring
+=== Production Integration: Docker-Native Reliability Monitoring
 
 Your fuzzing discoveries mean nothing if you can't detect similar failures in production. The ReDoS patterns, memory exhaustion scenarios, and logic failures you've found through systematic testing need corresponding monitoring that catches these issues before they impact customers.
 
-=== Container-Based Performance Monitoring
+==== Container-Based Performance Monitoring
 
 Deploy the same monitoring containers you built for fuzzing campaigns alongside your production services. Same Docker images. Same monitoring techniques. Different data sources.
 
@@ -314,7 +315,7 @@ Deploy monitoring sidecars that track the same metrics you measured during fuzzi
 * Resource pool utilization (connection monitoring)
 * Business rule validation results (logic failure detection)
 
-=== Intelligent Alert Generation
+==== Intelligent Alert Generation
 
 Raw monitoring data overwhelms operations teams. Your production monitoring needs the same intelligent filtering you apply during fuzzing campaigns--focus on actionable reliability issues while filtering out normal operational variation.
 
@@ -328,7 +329,7 @@ Correlation analysis to connect multiple symptoms to single root causes.
 
 Your alert generation should distinguish between random performance variation and systematic reliability degradation that indicates the failure modes you discovered through fuzzing.
 
-=== Intelligent Alert Generation and Prioritization
+==== Intelligent Alert Generation and Prioritization
 
 The volume of performance and resource consumption data generated by modern applications can quickly overwhelm traditional alerting systems. You need intelligent alert generation that can identify truly significant reliability issues while filtering out noise from normal operational variations and temporary performance fluctuations.
 
@@ -340,7 +341,7 @@ Implement alert correlation that can identify when multiple performance indicato
 
 Create alert prioritization policies that consider both technical severity and business impact. Critical user-facing services should generate immediate alerts for performance degradation, while background processing systems might tolerate higher thresholds before triggering alerts.
 
-=== Automated Incident Response and Remediation
+==== Automated Incident Response and Remediation
 
 When your monitoring systems detect reliability failures, automated response capabilities can often prevent minor issues from escalating into major service outages. Circuit breakers, automatic scaling, resource cleanup, and graceful degradation mechanisms can all be triggered automatically when specific failure patterns are detected.
 
@@ -352,7 +353,7 @@ Implement graduated response policies that escalate through increasing levels of
 
 Create comprehensive logging and audit trails for all automated response actions. When automated systems take remediation actions, you need detailed records of what was detected, what actions were taken, and what the results were. This information is crucial for post-incident analysis and system improvement.
 
-=== Continuous Improvement and Learning
+==== Continuous Improvement and Learning
 
 The reliability monitoring and response systems you implement should continuously learn from operational experience and improve their effectiveness over time. Machine learning techniques can help identify new patterns of reliability failures, refine alert thresholds based on operational feedback, and optimize response policies based on historical effectiveness.
 
@@ -364,7 +365,7 @@ Regularly analyze incident data to identify patterns and trends in reliability f
 
 Create regular review processes that evaluate the effectiveness of your reliability monitoring and response systems. Track metrics like alert accuracy, response time, and incident prevention effectiveness to identify areas for improvement and validate the value of your reliability engineering investments.
 
-== Chapter Recap: From Crashes to Comprehensive Service Reliability
+=== Chapter Recap: From Crashes to Comprehensive Service Reliability
 
 You've extended your Docker-plus-libFuzzer infrastructure from Chapter 2 beyond crash detection into the complete spectrum of reliability failures that don't announce themselves with obvious symptoms.
 
@@ -376,7 +377,7 @@ You've extended your Docker-plus-libFuzzer infrastructure from Chapter 2 beyond 
 
 The unified approach matters. Same Docker infrastructure. Same libFuzzer foundation. Same systematic exploration techniques. Extended from memory corruption into performance, resource management, and business logic reliability.
 
-== Call to Action: Deploy Performance and Logic Testing
+=== Call to Action: Deploy Performance and Logic Testing
 
 Start with your highest-risk input processing: anything using regular expressions for validation. Email forms, URL parsing, content filtering. Build ReDoS detection harnesses using your established libFuzzer infrastructure from Chapter 2. Most applications have ReDoS vulnerabilities waiting to be discovered.
 
@@ -386,7 +387,7 @@ Finally, extract business logic validation from your most critical workflows: or
 
 Focus on the reliability failures that actually impact your services. Don't test theoretical edge cases--target the input processing paths and business logic that handle real user data and could cause real service outages when they fail.
 
-== Transition to Property-Based Reliability Validation
+=== Transition to Property-Based Reliability Validation
 
 Your systematic reliability testing foundation--crash detection, performance monitoring, resource tracking, and logic validation--prepares you for the advanced techniques in Chapter 4. You'll learn Google FuzzTest for property-based testing that verifies algorithmic correctness, differential fuzzing that compares behavior across implementations, and gRPC/protobuf testing for service communication reliability.
 

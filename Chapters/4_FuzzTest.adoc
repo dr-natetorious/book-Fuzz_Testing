@@ -1,11 +1,12 @@
-= Chapter 4: Advanced Reliability Techniques
 :pp: {plus}{plus}
+
+== Chapter 4: Advanced Reliability Techniques
 
 _When Your Service Passes All Crash Tests But Still Fails Customers_
 
 '''
 
-== The Reliability Failure That Input-Based Testing Can't Catch
+=== The Reliability Failure That Input-Based Testing Can't Catch
 
 Over the past three chapters, you've developed systematic crash discovery skills. You can set up AFL{pp} to find memory corruption issues in compiled code. You've learned to write libFuzzer harnesses that identify input processing failures. Your Docker-based testing setup has become a reliable part of your development workflow.
 
@@ -21,13 +22,13 @@ This chapter introduces advanced reliability testing techniques that address dif
 
 '''
 
-== Property-Based Testing: Extending libFuzzer to Business Rules
+=== Property-Based Testing: Extending libFuzzer to Business Rules
 
 Remember how libFuzzer transformed your input validation testing in Chapter 2? Instead of manually crafting test cases, you wrote harnesses that accepted fuzzer-generated inputs and let libFuzzer systematically explore crash scenarios. Google FuzzTest applies this same systematic exploration to business logic correctness through property verification.
 
 Your duplicate payment bug represents a classic property violation. The business rule "process each payment exactly once" should hold regardless of network conditions, request timing, or service load. Traditional testing might verify that individual payment requests succeed, but property testing verifies that the correctness rule holds under various possible conditions.
 
-=== Catching Your First Business Logic Bug in 30 Minutes
+==== Catching Your First Business Logic Bug in 30 Minutes
 
 Time to build a property test that catches duplicate payment processing before it affects customers. Your payment service already passes input validation testing--but can it maintain business logic correctness when FuzzTest generates thousands of edge case scenarios?
 
@@ -41,7 +42,7 @@ The setup process leverages your existing Docker testing infrastructure but focu
 
 Notice how FuzzTest complements your existing crash testing rather than replacing it. AFL{pp} still prevents memory corruption in payment calculations. Input validation testing still catches parsing failures. FuzzTest adds business logic verification that ensures correct behavior even when parsing succeeds and memory remains uncorrupted.
 
-=== Extending Property Testing to Complex Business Rules
+==== Extending Property Testing to Complex Business Rules
 
 Your payment service likely enforces multiple business rules beyond duplicate prevention: "refunds cannot exceed original payment amounts," "promotional discounts apply only once per customer," "payment methods must be validated before processing." Each rule represents a property that FuzzTest can verify under systematic exploration.
 
@@ -55,13 +56,13 @@ Property testing becomes executable business rule documentation that prevents re
 
 But what happens when "new functionality" means deploying an entirely new version of your service? You've solved the duplicate payment problem with property testing, but now you face a different challenge: ensuring that your fix works consistently across service updates.
 
-== Differential Testing: Ensuring Consistency During Service Evolution
+=== Differential Testing: Ensuring Consistency During Service Evolution
 
 Picture this scenario: your property testing catches the duplicate payment bug, your team implements a fix, and comprehensive testing validates the solution. You deploy v2.0 of your payment service with confidence--only to discover that the new version handles promotional discount codes differently than v1.9, causing customer complaints about inconsistent pricing during your staged rollout.
 
 This scenario illustrates why property testing alone isn't sufficient for service reliability. You need differential testing to ensure that service changes maintain behavioral consistency for scenarios that matter to customers. Business logic might be correct in isolation but differ between implementations in ways that break customer expectations.
 
-=== Preventing Version Inconsistencies in 20 Minutes
+==== Preventing Version Inconsistencies in 20 Minutes
 
 Here's the specific problem: v1.9 calculated a 10% student discount by applying it before tax calculation, while v2.0 applies the same discount after tax calculation. Both approaches seem reasonable during code review. Both pass individual testing. But customers comparing receipts notice different final amounts for identical orders, leading to support tickets and refund requests.
 
@@ -73,7 +74,7 @@ This harness reuses your payment scenario generation from property testing. The 
 
 The Docker approach makes version comparison straightforward. Your containers already run the current service version for property testing--now you'll run old and new versions simultaneously with identical inputs. You can typically set up systematic detection of service behavior changes in 20-30 minutes--changes that would take manual testing much longer to discover thoroughly.
 
-=== Extending Differential Testing to API Compatibility
+==== Extending Differential Testing to API Compatibility
 
 Service evolution often involves API changes that must maintain backward compatibility for existing clients. Your payment service might add new JSON fields, modify response structures, or change error handling behavior in ways that break client integration expectations.
 
@@ -85,7 +86,7 @@ This testing prevents the integration failures that cause cascading service outa
 
 Differential testing catches compatibility breaks before they affect production integrations, but it assumes your service operates in isolation. In reality, your payment service communicates with other services through protocols that create additional reliability attack surfaces.
 
-== Protocol-Level Reliability: Extending Binary Fuzzing to Service Communication
+=== Protocol-Level Reliability: Extending Binary Fuzzing to Service Communication
 
 Your service maintains business logic correctness through property testing and behavioral consistency through differential testing. Yet last week, your monitoring alerts fired: "Payment service experiencing intermittent crashes during high load." The crashes weren't happening during normal operation--only when your inventory service sent unusually large product catalogs through gRPC during bulk updates.
 
@@ -93,7 +94,7 @@ Investigation revealed that your gRPC protobuf parsing logic had a buffer overfl
 
 gRPC protocol handling represents a similar reliability challenge to file format parsing from Chapter 1, just applied to network communication. Protobuf messages are structured binary data that services must parse correctly. Malformed protobuf messages can crash services, cause infinite loops, or trigger resource exhaustion--similar failure modes to those you've already addressed for file inputs.
 
-=== Applying Binary Fuzzing to gRPC Communication in 25 Minutes
+==== Applying Binary Fuzzing to gRPC Communication in 25 Minutes
 
 Your payment service accepts protobuf payment requests through gRPC endpoints. These endpoints represent attack surfaces similar to the file parsers you've already secured with AFL{pp}, but with an important difference: instead of malformed files on disk, you're dealing with malformed network messages that arrive during normal service operation.
 
@@ -105,7 +106,7 @@ This approach builds directly on your AFL{pp} expertise from Chapter 1. Instead 
 
 You can typically set up automated discovery of gRPC-specific reliability issues in 25-35 minutes--issues that traditional HTTP endpoint testing often misses. Protobuf parsing failures often cause different crash patterns than JSON parsing failures, requiring protocol-specific fuzzing to discover thoroughly.
 
-=== Combining Protocol Fuzzing with Property Verification
+==== Combining Protocol Fuzzing with Property Verification
 
 The most sophisticated reliability failures occur when protobuf messages parse successfully but violate business logic constraints. A malformed payment request might deserialize correctly but contain payment amounts that cause integer overflow in business calculations, potentially bypassing both protocol validation and business rule enforcement.
 
@@ -117,13 +118,13 @@ This combined approach discovers the subtle reliability failures that occur at p
 
 '''
 
-== Integrating Advanced Techniques for Comprehensive Service Reliability
+=== Integrating Advanced Techniques for Comprehensive Service Reliability
 
 Your payment service now benefits from three complementary reliability testing approaches: property testing for business logic correctness, differential testing for behavioral consistency, and protocol fuzzing for communication reliability. Each technique addresses specific failure modes, but their combination provides comprehensive coverage that prevents the majority of customer-affecting reliability issues.
 
 The key insight: advanced reliability testing techniques work best when applied together rather than in isolation. Property testing discovers business logic edge cases, differential testing ensures those edge cases behave consistently across service versions, and protocol testing verifies that edge cases don't cause communication failures.
 
-=== Building Your Comprehensive Reliability Testing Suite
+==== Building Your Comprehensive Reliability Testing Suite
 
 Integrate all three techniques into a unified testing approach that systematically explores your service's reliability boundaries. Use property testing to define business correctness constraints, differential testing to verify consistency across implementations, and protocol testing to ensure communication robustness.
 
@@ -133,7 +134,7 @@ This integration provides layered reliability verification that can catch failur
 
 The Docker orchestration approach scales this comprehensive testing without infrastructure complexity. The same containers that executed individual techniques now coordinate comprehensive reliability campaigns that provide much higher confidence in service reliability than any single technique alone.
 
-=== Measuring Comprehensive Reliability Improvement
+==== Measuring Comprehensive Reliability Improvement
 
 Track reliability metrics that reflect the business value of your comprehensive testing approach. Measure incident reduction rates, deployment confidence improvements, and customer experience quality increases that result from preventing multiple failure modes simultaneously.
 
@@ -145,13 +146,13 @@ Create reliability dashboards that demonstrate how comprehensive testing contrib
 
 '''
 
-== Preparing for Language-Specific and Organizational Scale
+=== Preparing for Language-Specific and Organizational Scale
 
 Your comprehensive reliability testing suite now prevents multiple classes of customer-affecting failures: business logic violations, service inconsistencies, and protocol communication problems. This individual service reliability mastery provides the foundation for scaling advanced techniques across larger engineering challenges.
 
 The techniques you've mastered work excellently for single services developed in single languages. But production environments typically involve multiple programming languages, distributed service architectures, and organizational processes that require adapted approaches. Your Docker-based testing infrastructure and systematic exploration expertise transfer directly to these more complex scenarios.
 
-=== Extending Techniques to Multi-Language Services
+==== Extending Techniques to Multi-Language Services
 
 Your organization likely includes services written in Java, Python, Go, and JavaScript that must communicate reliably despite different implementation approaches. The property testing, differential testing, and protocol fuzzing techniques you've mastered apply directly to multi-language scenarios with language-specific adaptations.
 
@@ -161,7 +162,7 @@ Consider how your payment service properties would apply to a Python-based payme
 
 This preview demonstrates how your comprehensive reliability testing approach scales beyond individual services to service ecosystems that span multiple programming languages. The same systematic exploration philosophy applies, but execution requires the language-specific tools and techniques covered in Part II.
 
-=== Building Toward Organizational Reliability Programs
+==== Building Toward Organizational Reliability Programs
 
 Individual service reliability testing provides excellent value, but organizational impact requires coordination across development teams, CI/CD pipelines, and operational processes. Your Docker-based infrastructure and advanced technique mastery provide the foundation for enterprise-scale reliability programs.
 
@@ -173,15 +174,15 @@ This integration preview shows how individual technique mastery scales to organi
 
 '''
 
-== Chapter Conclusion: From Advanced Techniques to Comprehensive Service Reliability
+=== Chapter Conclusion: From Advanced Techniques to Comprehensive Service Reliability
 
 Your payment service has evolved from an unreliable service with frequent crashes into a thoroughly tested service that maintains correctness under many conditions. Property testing helps prevent business logic failures that would cause duplicate charges and account balance corruption. Differential testing helps ensure consistent behavior across service versions and can prevent integration failures during deployments. Protocol testing can discover communication reliability issues that would cause service outages during network edge cases.
 
 Most importantly, these advanced techniques integrate seamlessly with your existing AFL{pp} and libFuzzer expertise. The same Docker containers that prevented memory corruption and input processing crashes now verify business logic correctness and communication reliability. Your systematic exploration skills have expanded from crash discovery to comprehensive reliability verification.
 
-=== Reliability Transformation Through Systematic Testing
+==== Reliability Transformation Through Systematic Testing
 
-=== Reliability Transformation Through Systematic Testing
+==== Reliability Transformation Through Systematic Testing
 
 Your service's reliability transformation tells a compelling story. Three months ago: memory corruption crashes every few days, JSON parsing failures during input validation, business logic bugs causing duplicate payments, service inconsistencies breaking client integrations during deployments, and protocol-level crashes during high load scenarios.
 
@@ -191,7 +192,7 @@ Track specific reliability improvements that demonstrate business value: 85% red
 
 Create reliability metrics that connect technical testing capabilities to business outcomes. Measure deployment confidence improvements, incident response time reductions, and customer satisfaction increases that result from comprehensive reliability verification. These metrics validate the investment in advanced testing infrastructure and support continued reliability program expansion.
 
-=== Integration Strategy for Maximum Reliability Coverage
+==== Integration Strategy for Maximum Reliability Coverage
 
 The most effective reliability testing combines all techniques strategically based on service risk profiles and failure impact patterns. Critical business logic receives property testing coverage. Service evolution gets differential testing validation. Communication protocols undergo systematic protocol fuzzing. The combination provides defense in depth against multiple failure modes simultaneously.
 
@@ -199,7 +200,7 @@ Your Docker-based testing infrastructure now supports comprehensive reliability 
 
 Consider how these techniques have significantly improved your approach to service reliability. Instead of reactive debugging after customer-affecting incidents, you have proactive verification that can catch sophisticated failures before production deployment. Instead of manual testing that covers only obvious scenarios, you have systematic exploration that can discover edge cases in business logic, service consistency, and communication protocols.
 
-=== Your Journey Continues: From Individual Mastery to Ecosystem Impact
+==== Your Journey Continues: From Individual Mastery to Ecosystem Impact
 
 You now possess advanced reliability testing capabilities that can help prevent many customer-affecting service failures. Individual service reliability mastery provides excellent value, but maximum impact requires applying these techniques across service ecosystems, programming languages, and organizational processes.
 

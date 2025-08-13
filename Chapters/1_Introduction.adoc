@@ -1,5 +1,6 @@
-= Chapter 1: Fuzzing Bootcamp - Your First Vulnerability Discovery
 :pp: {plus}{plus}
+
+== Chapter 1: Fuzzing Bootcamp - Your First Vulnerability Discovery
 
 _The journey from basic crash discovery to comprehensive reliability testing has begun, and your most impactful discoveries lie ahead. You've mastered the foundation--now it's time to build upon it with advanced techniques that will transform how you think about application reliability and systematic vulnerability discovery. moment you realize your application can crash in ways you never imagined_
 
@@ -13,7 +14,7 @@ Welcome to the world of modern fuzz testing--where we systematically explore the
 
 Your journey begins with a single goal: finding a crash within thirty minutes. This isn't theoretical--you'll actually break something, understand why it broke, and learn how to prevent similar failures in production.
 
-== The Hidden Reality of Application Failures
+=== The Hidden Reality of Application Failures
 
 Your application lives in a hostile world. Every input it processes represents a potential attack vector against your service's stability. HTTP requests carry malformed headers. Configuration files contain unexpected encoding. User uploads hide malicious payloads. API calls arrive with boundary-crossing parameters.
 
@@ -25,7 +26,7 @@ This vast unexplored space between "obviously correct" and "obviously wrong" inp
 
 *You've just learned why traditional testing fails against real-world input complexity.* Now let's understand how AFL{pp} solves this problem through intelligent exploration rather than brute force.
 
-== Understanding Coverage-Guided Crash Discovery
+=== Understanding Coverage-Guided Crash Discovery
 
 AFL{pp} transforms mindless mutation into intelligent exploration through a sophisticated feedback loop. Instead of throwing random data at your application hoping for crashes, AFL{pp} tracks which parts of your code execute during each test. When it discovers an input that reaches previously unexplored code paths, it marks that input as "interesting" and uses it as a foundation for generating new test cases.
 
@@ -43,7 +44,7 @@ You witness this intelligence in action when AFL{pp} discovers that flipping cer
 
 *You now understand how AFL{pp} uses coverage feedback to guide intelligent exploration rather than random testing.* Next, we'll set up the environment where you'll experience this intelligence firsthand.
 
-== Setting Up Your Crash Discovery Environment
+=== Setting Up Your Crash Discovery Environment
 
 Before you start finding crashes, you need a reliable, reproducible environment that isolates your fuzzing activities from your development system. Docker provides the perfect foundation for this isolation, ensuring your fuzzing setup works consistently across different machines while preventing any accidental contamination of your development environment.
 
@@ -61,7 +62,7 @@ You'll verify your environment setup by running a simple AFL{pp} test campaign a
 
 *You've now prepared a professional fuzzing environment that eliminates setup complications and enables immediate crash discovery.* Let's use this environment to find your first vulnerability.
 
-== Your First Vulnerability Discovery
+=== Your First Vulnerability Discovery
 
 Now comes the moment you've been waiting for--actually finding a crash. You'll start with a deliberately vulnerable application that contains memory corruption bugs typical of real-world software. This approach ensures you experience the satisfaction of crash discovery immediately, building confidence before tackling more complex targets.
 
@@ -89,7 +90,7 @@ You'll see AFL{pp} create a "crashes" directory containing the exact input that 
 
 *You've just discovered your first vulnerability using AFL{pp} and experienced the systematic exploration process that makes coverage-guided fuzzing so effective.* Now you need to understand what this crash means for your application's reliability.
 
-== Analyzing Your First Crash
+=== Analyzing Your First Crash
 
 Finding the crash is just the beginning. Understanding what went wrong, why it happened, and how it impacts service reliability requires systematic crash analysis. The skills you develop analyzing your first AFL{pp} crash will serve you throughout your fuzzing journey, enabling rapid triage of complex vulnerabilities in production systems.
 
@@ -113,7 +114,7 @@ Your analysis process determines whether each crash represents a genuine threat 
 
 *You now understand how to analyze AFL{pp} crashes systematically to determine their impact on service reliability and prioritize remediation efforts accordingly.* Let's build on this knowledge to create more effective fuzzing campaigns.
 
-== Building Effective Seed Corpora for Maximum Crash Discovery
+=== Building Effective Seed Corpora for Maximum Crash Discovery
 
 The quality of your initial seed corpus dramatically influences AFL{pp} effectiveness. Well-chosen seeds provide comprehensive code coverage while maintaining reasonable file sizes for efficient mutation. Poor corpus selection limits AFL{pp} to exploring only shallow code paths, missing the deep vulnerabilities that matter most for service reliability.
 
@@ -135,7 +136,7 @@ The corpus serves as institutional memory for your fuzzing campaigns. Once AFL{p
 
 *You've learned how to build and curate effective seed corpora that maximize AFL{pp} crash discovery while optimizing performance for practical fuzzing campaigns.* Now let's create harnesses that focus this discovery power on your specific applications.
 
-== Creating Your First Crash-Finding Harness
+=== Creating Your First Crash-Finding Harness
 
 Harness development transforms AFL{pp} from a generic fuzzing tool into a precision vulnerability discovery system tailored to your specific application. The harness defines how fuzzer-generated input reaches your target code, making the difference between effective crash discovery and hours of wasted computation exploring irrelevant code paths.
 
@@ -157,7 +158,7 @@ You'll develop harnesses that handle complex input scenarios involving multiple 
 
 *You've now mastered harness development techniques that focus AFL{pp} on discovering the crashes that actually threaten your service reliability.* Let's optimize performance to maximize your crash discovery rate.
 
-== Performance Optimization for Maximum Crash Discovery
+=== Performance Optimization for Maximum Crash Discovery
 
 AFL{pp} performance directly impacts crash discovery effectiveness. Faster fuzzing campaigns execute more test cases per hour, increasing the probability of finding rare crash conditions that require extensive exploration to trigger. Performance optimization transforms AFL{pp} from a slow research tool into a practical development aid that provides rapid feedback on code reliability.
 
@@ -181,7 +182,7 @@ The performance optimization process continues throughout fuzzing campaigns as y
 
 *You've learned to optimize AFL{pp} performance for maximum crash discovery throughput while maintaining the coverage accuracy needed for effective vulnerability discovery.* Now let's analyze the crashes you discover to understand their reliability impact.
 
-== Crash Analysis and Reliability Impact Assessment
+=== Crash Analysis and Reliability Impact Assessment
 
 Raw crashes provide little value without systematic analysis that transforms them into actionable reliability improvements. You need to determine which crashes represent genuine threats to service stability and which constitute theoretical vulnerabilities with minimal practical impact on production operations.
 
@@ -203,7 +204,7 @@ You'll develop crash signature generation techniques that create unique identifi
 
 *You now understand how to analyze AFL{pp} crashes systematically to determine their reliability impact and prioritize remediation efforts for maximum service stability improvement.* Let's build systems that automate this analysis at scale.
 
-== Building Automated Crash Detection Systems
+=== Building Automated Crash Detection Systems
 
 Manual crash analysis doesn't scale to the thousands of crashes that effective fuzzing campaigns can discover. You need automated detection systems that process crash dumps, classify vulnerabilities, and prioritize analysis efforts, transforming overwhelming crash volumes into manageable action items that focus human attention on the most critical issues.
 
@@ -225,7 +226,7 @@ The automated system preserves all raw crash data while providing filtered views
 
 *You've built automated systems that scale crash analysis to handle the volume of discoveries that effective fuzzing campaigns generate while focusing human attention on the most critical reliability threats.* Now let's establish workflows that sustain these capabilities over time.
 
-== Establishing Fuzzing Workflows That Scale
+=== Establishing Fuzzing Workflows That Scale
 
 Individual fuzzing successes mean little without sustainable workflows that integrate crash discovery into regular development practices. You need scalable workflows that automate the routine aspects of fuzzing while preserving human judgment for complex analysis and remediation decisions.
 
@@ -247,7 +248,7 @@ The workflow improvement process continuously refines procedures based on accumu
 
 *You've established sustainable workflows that integrate fuzzing into development practices while scaling to handle multiple applications and team members effectively.* Let's see how this foundation enables integration with your existing development processes.
 
-== Integration with Development Lifecycle
+=== Integration with Development Lifecycle
 
 Fuzzing provides maximum value when integrated seamlessly into existing development processes rather than operating as an isolated security activity. Your integration approach should enhance development velocity by catching crashes early, rather than slowing development through additional process overhead that discourages adoption.
 
@@ -267,7 +268,7 @@ The feedback loop between fuzzing results and development practices improves cod
 
 *You've integrated fuzzing into your development lifecycle in ways that enhance reliability without disrupting productivity, creating sustainable practices that improve over time.* Now let's consolidate what you've accomplished and look ahead to expanding your capabilities.
 
-== Your Fuzzing Foundation is Complete
+=== Your Fuzzing Foundation is Complete
 
 You've now experienced the complete cycle of vulnerability discovery using AFL{pp}: setting up professional fuzzing environments, configuring effective campaigns, discovering real crashes, and analyzing their impact on service reliability. This hands-on experience provides the solid foundation for everything that follows in your exploration of modern fuzzing techniques.
 
@@ -281,7 +282,7 @@ The investment you've made in learning AFL{pp} will pay dividends throughout you
 
 You've built workflows that scale beyond individual experimentation to team-wide adoption and organizational integration. The Docker environments, analysis procedures, and automation systems you've implemented provide the infrastructure needed to sustain fuzzing programs as your applications and teams grow.
 
-== Take Action on Your New Capabilities
+=== Take Action on Your New Capabilities
 
 Your next step is applying these techniques to your own applications rather than the artificial examples used for learning. Choose an application that processes external input--a web service endpoint, a configuration file parser, or a data processing pipeline. Build a harness using the patterns you've mastered, create a seed corpus that exercises diverse code paths, and launch your first production-relevant fuzzing campaign.
 
@@ -291,7 +292,7 @@ Document your experience as you apply these techniques to real applications. Wha
 
 Share your discoveries with your development team, but frame them in terms of reliability improvement rather than security vulnerabilities. Emphasize how fuzzing prevents production outages and improves user experience rather than focusing on theoretical attack scenarios. This framing encourages adoption and integration rather than defensive responses.
 
-== Beyond Basic Crash Discovery
+=== Beyond Basic Crash Discovery
 
 This chapter focused on the fundamentals of finding memory corruption vulnerabilities using AFL{pp}. Real applications require additional techniques to discover the full spectrum of reliability issues that can cause service outages. Input validation failures, logic errors, performance vulnerabilities, and resource exhaustion conditions all threaten service stability in ways that basic crash discovery might miss.
 
@@ -313,7 +314,7 @@ The harness development patterns you've learned with AFL{pp} translate directly 
 
 Understanding both AFL{pp} and libFuzzer provides the flexibility to choose the right tool for each fuzzing challenge, optimizing your crash discovery effectiveness while building comprehensive reliability testing programs. Some applications respond better to AFL{pp}'s file-based mutation strategies, while others benefit from libFuzzer's function-level testing approach.
 
-== Your Fuzzing Journey Continues
+=== Your Fuzzing Journey Continues
 
 Your fuzzing education progresses through hands-on libFuzzer campaigns that will discover new categories of vulnerabilities while reinforcing the fundamental concepts you've mastered in this chapter. Each tool you learn multiplies your ability to find reliability issues across different application architectures and input processing patterns.
 
@@ -325,7 +326,7 @@ The integration patterns you've established--Docker environments, automated anal
 
 Most importantly, you've developed the mindset that views systematic crash discovery as an essential component of software reliability engineering rather than an optional security activity. This perspective transforms how you approach application development, testing, and deployment across your entire career.
 
-== The Path Forward
+=== The Path Forward
 
 The journey from basic crash discovery to comprehensive reliability testing has begun, and your most impactful discoveries lie ahead. You've mastered the foundation--now it's time to build upon it with advanced techniques that will transform how you think about application reliability and systematic vulnerability discovery.
 

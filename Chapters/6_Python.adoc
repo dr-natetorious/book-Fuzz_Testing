@@ -1,5 +1,6 @@
-= Chapter 6: Python Service Reliability with Atheris
 :pp: {plus}{plus}
+
+== Chapter 6: Python Service Reliability with Atheris
 
 _Building Crash-Resistant FastAPI Services Through Systematic Testing_
 
@@ -11,7 +12,7 @@ This chapter transforms your libFuzzer expertise from Chapter 2 into Python reli
 
 By the end of this chapter, you'll have a complete reliability testing system running against your FastAPI release server, discovering file processing crashes, command validation failures, template rendering bombs, and background task corruption that cause real deployment pipeline outages. Let's build this systematic crash discovery approach using a single, realistic application.
 
-== Our Target Application: FastAPI Release Server with CQRS
+=== Our Target Application: FastAPI Release Server with CQRS
 
 Coverage-guided fuzzing requires realistic applications with multiple crash surfaces to demonstrate systematic exploration effectiveness. We'll focus on a single FastAPI release server throughout this chapter because software distribution systems combine components that interact in complex ways--exactly the scenarios where manual testing fails to discover edge cases but fuzzing excels through systematic boundary exploration.
 
@@ -27,7 +28,7 @@ Background release processing happens asynchronously through tasks that package 
 
 This realistic application architecture mirrors what you'll encounter in production FastAPI services that handle file processing, implement modern architectural patterns, and serve interactive frontends--making the reliability testing techniques directly applicable to your actual applications rather than contrived examples.
 
-== Atheris Foundation: LibFuzzer for Python Runtime
+=== Atheris Foundation: LibFuzzer for Python Runtime
 
 Coverage-guided fuzzing works identically in Python and C{pp}: generate inputs, track which code paths get executed, save inputs that reach new code, mutate those inputs to explore further. Atheris implements this exact approach for Python, bringing systematic exploration to Python's interpreted environment using the same principles you mastered in Chapter 2.
 
@@ -47,7 +48,7 @@ When does systematic exploration become essential? When your application process
 
 *Section Recap:* Atheris applies coverage-guided fuzzing to Python's interpreted environment using the same systematic exploration principles you learned in Chapter 2. The difference lies in discovering Python runtime failures rather than memory corruption bugs. Your Docker environment enables consistent fuzzing experiments that systematically explore code paths manual testing would never reach.
 
-== File Upload Endpoint Crash Discovery: Systematic File Mutation
+=== File Upload Endpoint Crash Discovery: Systematic File Mutation
 
 Coverage-guided fuzzing discovers file processing crashes through systematic file mutation that explores validation boundaries, format parsing edge cases, and storage failures that manual testing misses. When should you fuzz file upload endpoints? Immediately after implementing any endpoint that processes uploaded files--this is where systematic exploration prevents production crashes from malformed artifacts.
 
@@ -71,7 +72,7 @@ File storage operations create additional crash surfaces when disk space is exha
 
 *Section Recap:* Systematic file mutation through Atheris discovers format parsing crashes, extraction failures, and storage errors that cause upload endpoint failures. Coverage-guided exploration reaches file processing logic that manual testing rarely exercises, finding the exact file combinations that crash production release servers.
 
-== CQRS Command Processing: Systematic Validation Boundary Testing
+=== CQRS Command Processing: Systematic Validation Boundary Testing
 
 CQRS command processing crashes emerge when Atheris systematically corrupts command data flowing through validation, business rule enforcement, and event generation, discovering edge cases that bring down release management through command handling failures that manual testing would never attempt. When should you fuzz CQRS commands? Whenever commands process external data or enforce complex business rules--this is where systematic validation corruption discovers crashes.
 
@@ -95,7 +96,7 @@ Query processing in CQRS creates different crash surfaces when read model querie
 
 *Section Recap:* Systematic CQRS command mutation discovers validation crashes, business rule failures, and event generation issues that cause release management outages. Coverage-guided exploration of command processing reveals edge cases in business logic and workflow validation that manual testing cannot comprehensively discover.
 
-== Template Rendering Reliability: Systematic Release Interface Testing
+=== Template Rendering Reliability: Systematic Release Interface Testing
 
 Template rendering crashes emerge when Atheris systematically corrupts the data flowing into Jinja2 templates that generate Bootstrap 5.3 interfaces, release notes displays, and email notifications, discovering edge cases that bring down user interfaces through content rendering failures that manual testing would never attempt. When should you fuzz template rendering? Whenever templates receive dynamic data from release metadata, user input, or database queries--this is where systematic content corruption discovers crashes.
 
@@ -121,7 +122,7 @@ Administrative interface templates present unique reliability challenges when re
 
 *Section Recap:* Systematic template context mutation discovers interface rendering crashes, component failures, and email generation issues that cause user interface outages. Coverage-guided exploration of template processing reveals edge cases in content rendering and UI component generation that manual testing cannot systematically discover.
 
-== Database Operations: Systematic Release Data Management Testing
+=== Database Operations: Systematic Release Data Management Testing
 
 Database reliability failures emerge when Atheris systematically explores SQLAlchemy ORM boundaries, connection pool limits, and transaction edge cases that cause cascading release server outages. When should you fuzz database operations? Immediately after implementing any ORM code that processes release metadata, user data, or system information--database failures don't just affect individual requests, they can cascade into service-wide outages that prevent all release management operations.
 
@@ -147,7 +148,7 @@ User session management presents additional database reliability challenges when
 
 *Section Recap:* Systematic SQLAlchemy boundary testing discovers connection management failures, relationship traversal crashes, and transaction handling edge cases that cause database-related outages in release management operations. Coverage-guided exploration reaches database operation combinations that manual testing and integration testing cannot systematically discover.
 
-== Background Task Processing: Systematic Release Pipeline Testing
+=== Background Task Processing: Systematic Release Pipeline Testing
 
 Background task failures emerge when Atheris systematically explores async processing boundaries, task serialization limits, and release pipeline edge cases that cause silent failures accumulating into deployment pipeline degradation. When should you fuzz background tasks? Whenever tasks process uploaded files, generate release packages, or handle notification delivery--background tasks fail silently, making systematic testing essential for release pipeline reliability.
 
@@ -173,7 +174,7 @@ Release distribution involves updating artifact repositories, content delivery n
 
 *Section Recap:* Systematic async processing testing discovers task serialization failures, race conditions, and retry logic edge cases that cause silent background task failures accumulating into release pipeline degradation. Coverage-guided exploration of concurrent operations reveals reliability issues that manual testing and unit testing cannot systematically uncover.
 
-== Production Integration: Continuous Release Server Reliability
+=== Production Integration: Continuous Release Server Reliability
 
 Production reliability requires integrating systematic fuzzing into CI/CD pipelines, automated crash analysis, and operational monitoring that prevents crashes from affecting development team productivity. When should you implement continuous fuzzing? Before deploying any release server that handles team artifacts--continuous testing catches reliability regressions before they cause deployment pipeline outages.
 
@@ -197,7 +198,7 @@ Reliability metrics collection enables measurement of testing effectiveness, ser
 
 *Section Recap:* Continuous reliability testing through automated fuzzing prevents production outages by discovering regressions immediately, prioritizing crashes by development impact, and integrating with operational monitoring that connects technical improvements to team productivity outcomes.
 
-== Context Manager and Resource Management Extensions
+=== Context Manager and Resource Management Extensions
 
 Context managers are critical for release server reliability because they handle file uploads, database connections, and external service interactions that must be properly cleaned up even when exceptions occur. When should you focus on context manager testing? Whenever your application manages resources that can leak or corrupt during exception handling--context manager failures cause cascading resource exhaustion that degrades service performance over time.
 
@@ -211,7 +212,7 @@ File handling context managers present unique reliability challenges when upload
 
 *Section Recap:* Context manager testing prevents resource leaks and cleanup failures that accumulate into service degradation over time, ensuring proper resource management even under exception conditions.
 
-== Generator and Streaming Response Extensions
+=== Generator and Streaming Response Extensions
 
 Streaming responses are essential for release server performance when serving large artifacts, generating download statistics, or providing real-time processing updates. When should you focus on generator testing? Whenever your endpoints return streaming data that can cause memory exhaustion or infinite loops--generator failures can consume server resources until service degradation occurs.
 
@@ -225,7 +226,7 @@ Pagination generators present reliability challenges when database queries retur
 
 *Section Recap:* Generator testing prevents memory exhaustion and infinite loops in streaming operations, ensuring efficient resource usage and proper cleanup even under exception conditions.
 
-== Chapter Recap and Your Reliability Testing Foundation
+=== Chapter Recap and Your Reliability Testing Foundation
 
 This chapter transformed your libFuzzer expertise into comprehensive Python reliability testing using systematic fuzzing approaches that discover crashes before they cause deployment pipeline outages. You learned when to apply specific fuzzing techniques: file upload endpoint fuzzing for processing crashes, CQRS command validation testing for business logic failures, template rendering fuzzing for interface outages, database operation testing for connection and transaction issues, and background task testing for silent failures that accumulate into pipeline degradation.
 

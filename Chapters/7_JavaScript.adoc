@@ -1,5 +1,6 @@
-= Chapter 7: JavaScript Service Reliability with Jazzer.js
 :pp: {plus}{plus}
+
+== Chapter 7: JavaScript Service Reliability with Jazzer.js
 
 _Applying libFuzzer techniques from Chapter 2 to Node.js applications for systematic crash discovery_
 
@@ -13,7 +14,7 @@ Jazzer.js brings the libFuzzer approach to JavaScript environments. Same coverag
 
 Here's what makes JavaScript reliability testing different: your services fail through event loop blocking, prototype corruption, and async race conditions that don't exist in compiled languages. These failures require fuzzing techniques tailored to JavaScript's unique runtime characteristics.
 
-== *The Node.js Reliability Challenge*
+=== *The Node.js Reliability Challenge*
 
 JavaScript applications power critical infrastructure, yet their reliability testing often relies on manual scenarios and unit tests that miss the edge cases causing production outages. Consider a real-time API gateway handling authentication, request routing, and response transformation. Under normal conditions, it processes thousands of requests per second reliably. But what happens when malformed JSON corrupts the request parser? When concurrent operations create race conditions in connection pooling? When memory leaks accumulate during peak traffic?
 
@@ -23,7 +24,7 @@ That's exactly where Jazzer.js excels. Coverage-guided fuzzing systematically ge
 
 The key insight: JavaScript's flexibility creates reliability challenges that deterministic testing approaches cannot address comprehensively. You need systematic exploration of the input space combined with runtime monitoring that detects when operations fail, hang, or corrupt program state.
 
-== *Jazzer.js as libFuzzer for JavaScript Applications*
+=== *Jazzer.js as libFuzzer for JavaScript Applications*
 
 Everything you learned about libFuzzer workflow in Chapter 2 applies directly to Jazzer.js. You write harnesses that take byte arrays, convert them to JavaScript objects, and call your target functions while Jazzer.js tracks coverage and discovers inputs that cause crashes. The core principle remains unchanged: coverage-guided fuzzing finds code paths that manual testing misses.
 
@@ -37,7 +38,7 @@ What makes Jazzer.js particularly powerful for JavaScript reliability testing is
 
 The instrumentation overhead remains minimal during fuzzing. Jazzer.js uses V8's built-in profiling capabilities to track coverage without significantly impacting execution speed. Your harnesses run thousands of test cases per second, enabling comprehensive exploration of JavaScript application behavior under adversarial input conditions.
 
-== *Discovering JavaScript-Specific Crashes in API Gateway Services*
+=== *Discovering JavaScript-Specific Crashes in API Gateway Services*
 
 JavaScript applications fail in predictable patterns that differ significantly from compiled language failures. Understanding these patterns helps you write effective harnesses that trigger real reliability issues rather than theoretical problems. Prototype pollution corrupts object properties in ways that break service functionality. Event loop blocking causes request timeouts and service degradation. Memory leaks from closure retention eventually crash services through resource exhaustion.
 
@@ -61,7 +62,7 @@ Memory leaks develop when closures retain references to large objects, preventin
 
 The systematic approach uncovers reliability issues that emerge only under specific input conditions. Random testing might generate thousands of valid JSON payloads without triggering prototype pollution. Systematic fuzzing deliberately explores the input space around object merge operations, special property names, and edge cases in JSON processing logic.
 
-== *Express.js and Web Framework Reliability Testing*
+=== *Express.js and Web Framework Reliability Testing*
 
 Express.js applications present complex crash surfaces through middleware chains, routing patterns, parameter processing, and error handling mechanisms that process external input across multiple application layers. Each middleware function represents a potential crash point where unexpected input can cause unhandled exceptions, memory corruption, or service degradation.
 
@@ -85,7 +86,7 @@ Streaming responses create additional reliability challenges when large datasets
 
 The systematic approach targets each layer of Express.js processing with appropriate fuzzing techniques. Authentication middleware gets JWT tokens with malformed headers and invalid signatures. Routing logic receives URLs with special characters and encoding edge cases. Response processing handles objects with circular references and prototype corruption.
 
-== *Async/Await Race Conditions and Timing Failures*
+=== *Async/Await Race Conditions and Timing Failures*
 
 Concurrent operations in Node.js applications create timing-dependent failures that manifest only under specific execution orderings involving Promise resolution, callback execution, and event loop scheduling. These race conditions remain hidden during normal development testing but emerge under production load when multiple operations compete for shared resources.
 
@@ -109,7 +110,7 @@ Fuzzing discovers resource cleanup failures by generating operations that fail a
 
 The systematic approach explores timing-dependent failure modes that manual testing cannot reproduce reliably. By generating controlled concurrent operations and monitoring resource usage, fuzzing discovers race conditions, resource leaks, and error handling failures that affect long-term service reliability.
 
-== *Node.js Memory Management and Event Loop Reliability*
+=== *Node.js Memory Management and Event Loop Reliability*
 
 Node.js memory management and event loop behavior can mask resource leaks and performance degradation that eventually cause service failures. JavaScript's garbage collection provides automatic memory management, but incorrect closure usage, large object retention, and reference cycles can prevent cleanup and cause memory consumption to grow unbounded over time.
 
@@ -133,7 +134,7 @@ Fuzzing discovers event loop blocking by generating inputs that trigger expensiv
 
 The systematic approach monitors both memory usage and event loop performance during fuzzing campaigns. Automated detection flags inputs that cause memory growth, garbage collection pressure, or event loop delays. This monitoring provides early warning of performance degradation before it causes service failures in production.
 
-== *NPM Dependency and Module Loading Reliability*
+=== *NPM Dependency and Module Loading Reliability*
 
 Node.js applications rely heavily on NPM packages and dynamic module loading, creating failure points in dependency resolution, module initialization, and inter-package compatibility that can cause service crashes during startup or runtime operations. Your API gateway depends on dozens of packages for HTTP processing, database connectivity, authentication, and logging functionality.
 
@@ -155,7 +156,7 @@ Dependency graph corruption can occur when package updates change API contracts 
 
 The systematic approach tests module loading and dependency resolution under adversarial conditions. Fuzzing generates configuration scenarios that stress package resolution, tests dynamic imports with invalid module names, and simulates runtime conditions where package APIs behave unexpectedly. This testing reveals dependency reliability issues before they cause production failures.
 
-== *Practical Integration with CI/CD and Development Workflows*
+=== *Practical Integration with CI/CD and Development Workflows*
 
 JavaScript reliability testing with Jazzer.js requires integration with existing development workflows that maintains team productivity while providing continuous crash discovery. Your development pipeline already includes unit testing, integration testing, and deployment automation. Fuzzing should enhance these processes without creating bottlenecks or overwhelming developers with false positives.
 
@@ -175,7 +176,7 @@ Test result integration with existing JavaScript testing frameworks enables unif
 
 The systematic approach treats fuzzing as another form of automated testing that integrates seamlessly with existing development practices. Developers write harnesses using familiar JavaScript patterns. Crashes appear in familiar debugging tools. Fix verification follows established testing workflows. This integration ensures fuzzing enhances rather than disrupts existing development velocity.
 
-== *Measuring Fuzzing Effectiveness and ROI*
+=== *Measuring Fuzzing Effectiveness and ROI*
 
 Effective JavaScript reliability testing requires metrics that demonstrate value and guide optimization decisions. Raw crash counts provide limited insight into service improvement. You need measurements that connect fuzzing discoveries to operational reliability outcomes and development productivity improvements.
 
@@ -197,7 +198,7 @@ The measurement approach balances technical metrics with business outcomes. Deve
 
 '''
 
-== *Chapter Recap: Building JavaScript Reliability Through Systematic Testing*
+=== *Chapter Recap: Building JavaScript Reliability Through Systematic Testing*
 
 You've implemented comprehensive JavaScript reliability testing using Jazzer.js across the full spectrum of Node.js application challenges. Starting with basic crash discovery in simple harnesses, you progressed through JavaScript-specific failure modes like prototype pollution and event loop blocking. You built monitoring systems that detect memory leaks and race conditions. You integrated fuzzing into development workflows that maintain team productivity while providing continuous reliability improvement.
 
@@ -205,7 +206,7 @@ The systematic approach transforms JavaScript application reliability from hope-
 
 Your Node.js services now benefit from the same coverage-guided testing that compiled applications receive through AFL{pp}. Prototype pollution, event loop blocking, and async race conditions become discoverable through systematic testing rather than production incidents. Memory management issues reveal themselves during development rather than causing mysterious production crashes weeks later.
 
-== *Take Action: Implement JavaScript Reliability Testing*
+=== *Take Action: Implement JavaScript Reliability Testing*
 
 Transform your Node.js application reliability by implementing the Jazzer.js techniques demonstrated throughout this chapter. Begin with the API gateway example harnesses, then adapt them to your specific application architecture and reliability challenges. Focus on the JavaScript-specific failure modes that manual testing consistently misses: object mutation edge cases, concurrent operation conflicts, and resource management scenarios.
 
@@ -213,7 +214,7 @@ Set up the Docker-based fuzzing environment and run your first harness within th
 
 Integrate fuzzing into your development workflow by adapting the CI/CD pipeline examples to your specific environment and deployment process. Start with lightweight fuzzing during pull request validation, then expand to comprehensive campaigns during integration testing. The goal is preventing JavaScript reliability issues from reaching production through systematic pre-deployment discovery.
 
-== *Next Steps: Enterprise Reliability Through Automated Pipelines*
+=== *Next Steps: Enterprise Reliability Through Automated Pipelines*
 
 Your JavaScript applications now benefit from systematic reliability testing, but individual fuzzing efforts need coordination across larger development organizations. Chapter 8 demonstrates how to transform the individual testing techniques you've mastered into automated reliability testing pipelines that serve multiple teams efficiently.
 

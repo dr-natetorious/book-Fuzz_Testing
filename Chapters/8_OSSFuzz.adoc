@@ -1,5 +1,6 @@
-= Chapter 8: Automated Reliability Testing Pipelines
 :pp: {plus}{plus}
+
+== Chapter 8: Automated Reliability Testing Pipelines
 
 _From individual fuzzing expertise to enterprise-scale continuous reliability testing_
 
@@ -35,7 +36,7 @@ This chapter follows Sarah's team as they evolve from manual fuzzing campaigns t
 
 The progression reveals why most organizations need both immediate CI automation and dedicated fuzzing infrastructure working together. CI provides rapid feedback for development velocity. OSS-Fuzz provides comprehensive coverage for reliability assurance. The combination delivers both speed and thoroughness without forcing false choices between development velocity and service reliability.
 
-== Quick Wins: Getting Fuzzing into CI/CD Pipelines
+=== Quick Wins: Getting Fuzzing into CI/CD Pipelines
 
 Sarah started with the obvious approach: integrate existing fuzzing techniques into CloudFlow's GitHub Actions workflows. The goal was immediate automation that could demonstrate value without requiring infrastructure changes or lengthy deployment processes.
 
@@ -71,7 +72,7 @@ The integration emphasizes education alongside automation. When fuzzing discover
 
 Within two months, Sarah's basic CI automation prevented twelve production outages across CloudFlow's engineering teams. The success demonstrated clear value while revealing the limitations that would drive their next automation evolution.
 
-== Hitting the Walls: CI Automation Limitations
+=== Hitting the Walls: CI Automation Limitations
 
 CI integration provided immediate wins but quickly revealed fundamental constraints that prevented comprehensive reliability testing. Sarah's team encountered these limitations during their third month of deployment when success created new scaling challenges.
 
@@ -101,7 +102,7 @@ These limitations didn't invalidate CI automation--the immediate feedback and de
 
 Sarah's team needed enterprise-scale fuzzing infrastructure that could operate independently of development CI/CD pipelines while integrating seamlessly with existing automation. The solution would combine CI automation for immediate feedback with dedicated fuzzing infrastructure for comprehensive coverage.
 
-== Enterprise Scale: Private OSS-Fuzz Infrastructure
+=== Enterprise Scale: Private OSS-Fuzz Infrastructure
 
 The limitations of CI-constrained fuzzing led Sarah's team to investigate enterprise-scale solutions that could provide comprehensive reliability testing without the resource and time constraints that hampered their CI automation. They discovered that major technology companies solve this challenge through dedicated fuzzing infrastructure, primarily using Google's OSS-Fuzz platform adapted for private repositories.
 

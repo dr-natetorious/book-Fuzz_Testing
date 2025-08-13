@@ -4,13 +4,15 @@
 :toclevels: 2
 :pdf-theme: pagella
 :pdf-themesdir: themes
+:title: Modern Fuzz Testing
+:doctitle: Modern Fuzz Testing
 
 // Include chapters
 include::Chapters/1_Introduction.adoc[]
 include::Chapters/2_libFuzzer.adoc[]
 include::Chapters/3_Coverage.adoc[]
-include::Chapters/4_FuzzTest.adoc[]
 include::Chapters/5_CrossLang.adoc[]
 include::Chapters/6_Python.adoc[]
 include::Chapters/7_JavaScript.adoc[]
 include::Chapters/8_OSSFuzz.adoc[]
+include::Chapters/4_FuzzTest.adoc[]

@@ -1,5 +1,6 @@
-= Chapter 5: Cross-Language Application Security - Integration Solutions
 :pp: {plus}{plus}
+
+== Chapter 5: Cross-Language Application Security - Integration Solutions
 
 _Solving reliability testing challenges in modern polyglot applications where crashes span multiple programming languages and integration boundaries._
 
@@ -17,7 +18,7 @@ This chapter transforms you from a single-component crash discoverer into a poly
 
 By the end of this chapter, you'll have working systems that coordinate multiple fuzzing campaigns, share crash-triggering inputs between different language environments, and identify crash scenarios where failures in one component reliably break others. You'll see exactly how memory corruption in C{pp} manifests as service failures in Python, and you'll know how to catch these cross-boundary crashes before they reach production.
 
-== 5.1 The Polyglot Application Crash Problem
+=== 5.1 The Polyglot Application Crash Problem
 
 Modern applications create a reliability paradox that traditional crash testing approaches completely miss. Individual components become more reliable as you apply the fuzzing techniques from previous chapters--your C{pp} libraries handle edge cases properly, your Python services validate input correctly, your Java processors manage memory efficiently. Yet system-wide reliability often degrades because these well-tested components interact in ways that create new failure modes.
 
@@ -52,7 +53,7 @@ The solution isn't abandoning your successful single-component fuzzing approache
 
 Building effective integration crash discovery requires understanding both the technical mechanisms that connect your services and the failure modes that emerge when those mechanisms break under stress. But before diving into coordination techniques, you need to master the specific crash patterns that emerge at cross-language boundaries.
 
-== 5.2 Cross-Language Crash Discovery
+=== 5.2 Cross-Language Crash Discovery
 
 Integration crashes rarely announce themselves with obvious core dumps or stack traces that point to root causes. They manifest as subtle data corruption, intermittent service failures, or seemingly unrelated errors that appear hours or days after the initial trigger. Your C{pp} library experiences a minor buffer overflow that corrupts a single byte in processed output. Your Python service processes that corrupted data without crashing but produces malformed API responses. Your JavaScript frontend attempts to parse those responses, encounters unexpected data structures, and crashes with TypeError exceptions that seem unrelated to the original memory corruption.
 
@@ -118,7 +119,7 @@ Your cross-language crash discovery approach must trace these chains of causatio
 
 This systematic approach to cross-language crash discovery reveals reliability issues that traditional single-component testing misses entirely. But discovery is only the first step--you need orchestration systems that coordinate crash testing across your entire technology stack.
 
-== 5.3 Unified Fuzzing Workflow Orchestration
+=== 5.3 Unified Fuzzing Workflow Orchestration
 
 Individual fuzzing tools excel within their domains, but polyglot applications require orchestration systems that coordinate multiple crash discovery campaigns while maintaining unified visibility into reliability issues across the entire technology stack. You need workflows that simultaneously run AFL{pp} against native components, Atheris against Python services, Jazzer against Java applications, and Jazzer.js against Node.js APIs, then correlate results to identify cross-language crash patterns.
 
@@ -184,7 +185,7 @@ Your unified fuzzing workflow must account for these runtime differences while m
 
 Successful orchestration transforms individual fuzzing tools into a cohesive crash discovery system that understands and tests your application's complete architecture. But orchestration alone isn't sufficient--you need specialized approaches for the most critical integration points in modern applications.
 
-== 5.4 Microservices and API Boundary Reliability Testing
+=== 5.4 Microservices and API Boundary Reliability Testing
 
 Microservices architectures amplify cross-language crash challenges by creating numerous service-to-service communication boundaries where reliability issues can emerge from protocol misunderstandings, data format inconsistencies, and cascade failure propagation. Each API endpoint represents a potential crash boundary where upstream services might send malformed data that downstream services process incorrectly, leading to failures that cascade through your entire system.
 
@@ -250,7 +251,7 @@ The key to effective microservices crash testing is thinking systemically rather
 
 Understanding microservices crash patterns prepares you for the broader challenge of container and runtime integration reliability, where the boundaries between services become even more complex and potential crash surfaces multiply.
 
-== 5.5 Container and Runtime Integration Reliability
+=== 5.5 Container and Runtime Integration Reliability
 
 Containerized applications create layered reliability boundaries that extend cross-language crash concerns into infrastructure and runtime environments. Your Python service might handle malformed input correctly within its language constraints, but container resource exhaustion could cause the entire service to crash through OOM kills or disk space failures. Container orchestration platforms like Kubernetes add additional complexity layers where configuration errors, resource limits, and networking issues can create crash scenarios that span multiple containers and services.
 
@@ -316,7 +317,7 @@ Your container-aware crash testing approach should test these layered interactio
 
 Successful container and runtime crash testing requires understanding both the technical mechanisms that provide isolation and the configuration patterns that can undermine reliability under stress. But even comprehensive container crash testing is incomplete without unified reporting and crash correlation across your entire polyglot application ecosystem.
 
-== 5.6 Comprehensive Crash Reporting and Correlation
+=== 5.6 Comprehensive Crash Reporting and Correlation
 
 Cross-language crash discovery generates enormous amounts of data--memory corruption reports from AFL{pp}, exceptions from Atheris, JVM crashes from Jazzer, runtime errors from Jazzer.js, container termination logs, and resource exhaustion alerts. Raw crash data from multiple fuzzing campaigns quickly becomes overwhelming without intelligent analysis, correlation, and prioritization systems that help you focus remediation efforts on the most critical reliability issues that actually cause customer-facing outages.
 
@@ -391,7 +392,7 @@ The goal of comprehensive crash reporting and correlation is transforming raw fa
 
 Your reporting framework should evolve with your reliability testing program, incorporating lessons learned from crash remediation efforts and adjusting correlation algorithms based on the types of integration crashes most relevant to your specific technology stack and architecture patterns.
 
-== Chapter 5 Recap: Mastering Cross-Language Crash Discovery
+=== Chapter 5 Recap: Mastering Cross-Language Crash Discovery
 
 You've now transformed from a single-component crash discoverer into a polyglot reliability engineer capable of finding and correlating crashes across complex technology stacks. This chapter equipped you with practical frameworks for understanding, testing, and preventing the integration crashes that represent the most critical reliability risks in modern applications.
 
@@ -407,7 +408,7 @@ Container and runtime integration reliability testing techniques enable you to d
 
 The comprehensive crash reporting and correlation frameworks you built transform raw crash data into actionable intelligence that guides remediation priorities and coordination efforts. You can deduplicate crashes across language boundaries, assess impact based on cascade failure potential, identify crash chains that span multiple components, and provide coordinated remediation guidance that ensures fixes work together effectively.
 
-== Call to Action: Implement Cross-Language Crash Testing
+=== Call to Action: Implement Cross-Language Crash Testing
 
 Your polyglot applications contain integration crashes that single-component testing approaches will never discover. These cross-language reliability issues represent some of the highest-impact risks in your environment because they can cause system-wide outages and are exceptionally difficult to detect through traditional testing methods.
 
@@ -423,7 +424,7 @@ Don't wait for a comprehensive enterprise-scale solution before starting cross-l
 
 The cross-language crashes in your applications aren't going to fix themselves, and traditional reliability testing approaches will continue missing these critical integration boundary failures. Every day you delay implementing comprehensive cross-language crash testing is another day your most critical reliability risks remain undiscovered and unaddressed.
 
-== Transition to Chapter 6: Complex Input Format Fuzzing
+=== Transition to Chapter 6: Complex Input Format Fuzzing
 
 Cross-language integration reliability provides the architectural foundation for comprehensive polyglot application testing, but it assumes that individual components properly handle their expected input formats. In practice, modern applications must process increasingly complex structured data--JSON APIs, XML configurations, protocol buffers, binary formats, and domain-specific languages--where traditional mutation-based fuzzing approaches fail to achieve meaningful code coverage and crash discovery.
 
