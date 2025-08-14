@@ -1,0 +1,5 @@
+#!/bin/bash
+
+for file in Chapters/*.md; do
+    kramdoc --heading-offset=1 "$file" -o "${file%.md}.adoc"
+done
