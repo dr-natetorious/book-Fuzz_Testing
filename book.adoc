@@ -26,5 +26,5 @@ include::Chapters/4_FuzzTest.adoc[]
 // Scaling Solution
 include::Chapters/8_OSSFuzz.adoc[]
 
-// Culture and team here
+include::Chapters/10_Team.adoc[]
 include::Chapters/11_Conclusion.adoc[]
