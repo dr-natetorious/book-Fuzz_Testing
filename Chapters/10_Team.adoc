@@ -1,0 +1,3 @@
+== Culture and team
+
+Chapter covering how to built resliency mindset into your organization.
