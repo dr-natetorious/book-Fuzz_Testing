@@ -1,4 +1,4 @@
-= Modern Fuzz Testing: The Infinite Money Machine Heist
+= Modern Fuzz Testing: Automating Resilience with AI, CI/CD, and Observability
 :doctype: book
 :toc: left
 :toclevels: 2
@@ -7,20 +7,22 @@
 :title: Modern Fuzz Testing
 :doctitle: Modern Fuzz Testing
 
-// Include chapters
+// Introduction
 include::Chapters/0_Introduction.adoc[]
-# Setup 
 
+// Using libFuzzer
 include::Chapters/2_libFuzzer.adoc[]
 include::Chapters/3_Coverage.adoc[]
 include::Chapters/6_Python.adoc[]
 include::Chapters/7_JavaScript.adoc[]
-include::Chapters/5_CrossLang.adoc[]
 
+// Native Code
 include::Chapters/1_AFL.adoc[]
-# C++ chapter 1 & 2
-
+// Need one more C++ chapter here
+include::Chapters/5_CrossLang.adoc[]
 include::Chapters/4_FuzzTest.adoc[]
 
+// Scaling Solution
 include::Chapters/8_OSSFuzz.adoc[]
-# Conclusion
+// Culture and team here
+include::Chapters/11_Conclusion.adoc[]
