@@ -12,17 +12,19 @@ include::Chapters/0_Introduction.adoc[]
 
 // Using libFuzzer
 include::Chapters/2_libFuzzer.adoc[]
-include::Chapters/3_Coverage.adoc[]
 include::Chapters/6_Python.adoc[]
 include::Chapters/7_JavaScript.adoc[]
+include::Chapters/3_Coverage.adoc[]
 
 // Native Code
 include::Chapters/1_AFL.adoc[]
 // Need one more C++ chapter here
+// Symbolic execution maybe?
 include::Chapters/5_CrossLang.adoc[]
 include::Chapters/4_FuzzTest.adoc[]
 
 // Scaling Solution
 include::Chapters/8_OSSFuzz.adoc[]
+
 // Culture and team here
 include::Chapters/11_Conclusion.adoc[]

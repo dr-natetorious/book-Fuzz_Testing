@@ -116,7 +116,7 @@ Network monitoring during fuzzing enables immediate detection of JNDI lookup att
 
 Input generation for JNDI injection discovery benefits from understanding common injection patterns. While random string generation occasionally produces injection syntax, structured generation that incorporates known JNDI patterns increases discovery efficiency.
 
-[PLACEHOLDER:CODE jndi_payload_generation. Structured input generation for JNDI injection discovery including common patterns, protocol variations, and evasion techniques. Medium value.]
+[PLACEHOLDER:CODE] jndi_payload_generation. Structured input generation for JNDI injection discovery including common patterns, protocol variations, and evasion techniques. Medium value.]
 
 ==== JSON Deserialization Vulnerabilities
 
