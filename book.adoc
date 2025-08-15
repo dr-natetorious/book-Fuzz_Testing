@@ -8,23 +8,21 @@
 :doctitle: Modern Fuzz Testing
 
 // Introduction
-include::Chapters/0_Introduction.adoc[]
-
-// Using libFuzzer
-include::Chapters/2_libFuzzer.adoc[]
-include::Chapters/6_Python.adoc[]
-include::Chapters/7_JavaScript.adoc[]
-include::Chapters/3_Coverage.adoc[]
+include::Chapters/0_Introduction.adoc[] // who, what, where, when, why, how
 
 // Native Code
-include::Chapters/1_AFL.adoc[]
+include::Chapters/1_AFL.adoc[] // intro AFL
 // Need one more C++ chapter here
-// Symbolic execution maybe?
-include::Chapters/5_CrossLang.adoc[]
-include::Chapters/4_FuzzTest.adoc[]
+include::Chapters/3_Coverage.adoc[] // rewrite as Symbolic execution maybe
+include::Chapters/5_CrossLang.adoc[] // ImageMagik Library via JNI and FFI
+
+// Using libFuzzer
+include::Chapters/2_libFuzzer.adoc[] // intro libfuzzer + java log4j 
+include::Chapters/6_Python.adoc[] // Release server example
+include::Chapters/7_JavaScript.adoc[] // Chatbot example
 
 // Scaling Solution
-include::Chapters/8_OSSFuzz.adoc[]
-
-include::Chapters/10_Team.adoc[]
-include::Chapters/11_Conclusion.adoc[]
+include::Chapters/8_OSSFuzz.adoc[]  // CI/CD and OSS-Fuzz
+include::Chapters/4_FuzzTest.adoc[] // Google FuzzTest tool
+include::Chapters/10_Team.adoc[] // scale within your org
+include::Chapters/11_Conclusion.adoc[] // thanks for playing.
