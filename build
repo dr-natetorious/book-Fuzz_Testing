@@ -25,18 +25,18 @@ else
   exit 1
 fi
 
-# Generate Word document
-echo ""
-echo "Generating Word document..."
-asciidoctor -b docbook book.adoc -o book.xml
-if [ $? -eq 0 ]; then
-    pandoc book.xml -f docbook -t docx --reference-doc=template.docx -o book.docx
-    if [ $? -eq 0 ]; then
-        echo "✅ Word document generated successfully: book.docx"
-        rm book.xml  # Clean up intermediate file
-    else
-        echo "❌ Word document generation failed"
-    fi
-else
-    echo "❌ DocBook conversion failed"
-fi
+# # Generate Word document
+# echo ""
+# echo "Generating Word document..."
+# asciidoctor -b docbook book.adoc -o book.xml
+# if [ $? -eq 0 ]; then
+#     pandoc book.xml -f docbook -t docx --reference-doc=template.docx -o book.docx
+#     if [ $? -eq 0 ]; then
+#         echo "✅ Word document generated successfully: book.docx"
+#         rm book.xml  # Clean up intermediate file
+#     else
+#         echo "❌ Word document generation failed"
+#     fi
+# else
+#     echo "❌ DocBook conversion failed"
+# fi
