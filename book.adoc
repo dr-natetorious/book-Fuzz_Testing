@@ -2,27 +2,50 @@
 :doctype: book
 :toc: left
 :toclevels: 2
+
+// Theme configuration...
 :pdf-theme: pagella
 :pdf-themesdir: themes
 :title: Modern Fuzz Testing
 :doctitle: Modern Fuzz Testing
 
+// Diagram configurations...
+:imagesdir: images/{docname}
+:imagesoutdir: {imagesdir}
+:diagram-output-file-extension: png
+
+//
+//  Book outline.
+//
+
 // Introduction
-include::Chapters/0_Introduction.adoc[] // who, what, where, when, why, how
+include::Chapters/0_Introduction.adoc[]
 
 // Native Code
-include::Chapters/1_AFL.adoc[] // intro AFL
-// Need one more C++ chapter here
-include::Chapters/3_Coverage.adoc[] // rewrite as Symbolic execution maybe
-include::Chapters/5_CrossLang.adoc[] // ImageMagik Library via JNI and FFI
+// intro AFL and simple imagemagik
+include::Chapters/1_AFL.adoc[] 
+// advanced afl
+include::Chapters/9_AFL_Advanced.adoc[]
+// afl with JNI and FFI somewhere 
+include::Chapters/5_CrossLang.adoc[]
+
+// rewrite as Symbolic execution maybe
+include::Chapters/3_Coverage.adoc[]
 
 // Using libFuzzer
-include::Chapters/2_libFuzzer.adoc[] // intro libfuzzer + java log4j 
-include::Chapters/6_Python.adoc[] // Release server example
-include::Chapters/7_JavaScript.adoc[] // Chatbot example
+// intro libfuzzer + java log4j
+include::Chapters/2_libFuzzer.adoc[]
+// Release server example  
+include::Chapters/6_Python.adoc[]
+// Chatbot example
+include::Chapters/7_JavaScript.adoc[]
 
 // Scaling Solution
-include::Chapters/8_OSSFuzz.adoc[]  // CI/CD and OSS-Fuzz
-include::Chapters/4_FuzzTest.adoc[] // Google FuzzTest tool
-include::Chapters/10_Team.adoc[] // scale within your org
-include::Chapters/11_Conclusion.adoc[] // thanks for playing.
+// CI/CD and OSS-Fuzz
+include::Chapters/8_OSSFuzz.adoc[]
+// Google FuzzTest tool
+include::Chapters/4_FuzzTest.adoc[]
+// scale within your org
+include::Chapters/10_Team.adoc[]
+// thanks for playing.
+include::Chapters/11_Conclusion.adoc[]

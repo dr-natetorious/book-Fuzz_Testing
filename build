@@ -15,7 +15,7 @@ echo "- Captions: 9pt italic serif"
 echo "- Code: 10pt monospace"
 echo ""
 
-if asciidoctor-pdf book.adoc; then
+if asciidoctor-pdf -a diagrams book.adoc; then
   echo ""
   echo "✅ PDF generated successfully: $OUTPUT_FILE"
   echo "📖 Your book now uses professional Palatino-style typography!"
@@ -25,7 +25,7 @@ else
   exit 1
 fi
 
-# # Generate Word document
+# Generate Word document
 # echo ""
 # echo "Generating Word document..."
 # asciidoctor -b docbook book.adoc -o book.xml
