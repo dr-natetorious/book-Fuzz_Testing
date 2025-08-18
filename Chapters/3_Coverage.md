@@ -1,4 +1,4 @@
-# Chapter 3: Discover Logic and Performance Failures
+# Discover Logic and Performance Failures
 
 **Tool Requirements:** Performance profiling tools, libFuzzer with custom harnesses, Docker, and monitoring tools
 

@@ -1,4 +1,4 @@
-# Chapter 2: Fix Input Processing Failures Through RCE Discovery [30 pages]
+# Fix Input Processing Failures Through RCE Discovery [30 pages]
 
 **Tool Requirements:** libFuzzer, Jazzer, OpenJDK, Maven/Gradle, Docker
 

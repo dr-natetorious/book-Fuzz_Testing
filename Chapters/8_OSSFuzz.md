@@ -1,4 +1,4 @@
-# Chapter 8: Automated Reliability Testing Pipelines
+# Automated Reliability Testing Pipelines
 
 *Scale fuzzing from individual techniques to organizational reliability programs using OSS-Fuzz*
 

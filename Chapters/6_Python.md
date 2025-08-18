@@ -1,4 +1,4 @@
-# Chapter 6: Python Service Reliability with Atheris
+# Python Service Reliability with Atheris
 
 *Building Crash-Resistant FastAPI Services Through Systematic Testing*
 

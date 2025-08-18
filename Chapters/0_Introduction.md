@@ -1,4 +1,4 @@
-# Chapter 1: Introduction to Modern Fuzz Testing
+# Introduction
 
 *"The real problem is not whether machines think but whether men do." - B.F. Skinner*
 

@@ -1,4 +1,4 @@
-# Chapter 5: Cross-Language Application Security - FFI Boundary Testing
+# Cross-Language Application Security - FFI Boundary Testing
 
 *Discovering vulnerabilities that only exist when native libraries interact with managed language runtimes through Foreign Function Interface boundaries*
 
@@ -14,7 +14,7 @@ You'll discover why the CVE-2015-8895 crash you found in Chapter 1 behaves diffe
 
 **Your mission: discover vulnerabilities that only exist when native libraries cross language boundaries.**
 
-## 5.1 Understanding FFI Boundaries and Their Security Implications
+## 4.1 Understanding FFI Boundaries and Their Security Implications
 
 Foreign Function Interface (FFI) mechanisms enable high-level languages to call functions written in lower-level languages, typically C or C++. Python applications use ctypes to call shared libraries directly, or import extension modules written in C that provide Python-callable wrappers around native functionality. Java applications use the Java Native Interface (JNI) to invoke native methods, either through third-party libraries or custom JNI implementations.
 
@@ -32,7 +32,7 @@ Most importantly, FFI boundaries enable vulnerabilities that don't exist in eith
 
 *Understanding how FFI bridges create unique security problems sets the stage for systematic vulnerability discovery.* Time to prove that Chapter 1 techniques work across language boundaries—then discover entirely new bug classes.
 
-## 5.2 Validating Chapter 1 Discoveries Through Python FFI
+## 4.2 Validating Chapter 1 Discoveries Through Python FFI
 
 Before discovering new FFI-specific vulnerabilities, you'll verify that Chapter 1 vulnerabilities still trigger when ImageMagick runs through Python bindings. This validation proves that AFL++ techniques work across language boundaries while establishing baseline behavior for comparison with FFI-specific issues you'll discover next.
 
@@ -46,7 +46,7 @@ This validation establishes the foundation for discovering FFI-specific vulnerab
 
 *Now you're ready to systematically discover vulnerabilities that exist only when ImageMagick runs inside managed language processes.*
 
-## 5.3 Discovering FFI-Specific Double-Free Vulnerabilities
+## 4.3 Discovering FFI-Specific Double-Free Vulnerabilities
 
 The most dangerous FFI-specific vulnerabilities occur when both native code and managed language runtime attempt to manage the same memory regions. You'll discover double-free conditions that don't exist in standalone ImageMagick testing but trigger consistently when ImageMagick objects are wrapped by Python or Java objects with automatic cleanup behavior.
 
@@ -66,7 +66,7 @@ Systematic discovery requires AFL++ harnesses that explicitly trigger garbage co
 
 *Double-free discovery demonstrates how FFI boundaries create entirely new vulnerability classes.* Next, you'll explore how multi-threaded environments compound these problems through race conditions that don't exist in single-threaded testing.
 
-## 5.4 Java JNI Threading Race Condition Discovery
+## 4.4 Java JNI Threading Race Condition Discovery
 
 Java applications frequently call ImageMagick from multiple threads simultaneously through JNI bindings. Sounds harmless enough, right? Wrong. This creates race conditions that don't exist when testing ImageMagick in single-threaded environments.
 
@@ -84,7 +84,7 @@ These threading vulnerabilities require specialized AFL++ harnesses that coordin
 
 *Threading races reveal how FFI complexity multiplies in realistic deployment scenarios.* But concurrent access isn't the only way FFI boundaries corrupt managed language state—you'll also discover how native crashes leave object reference systems in shambles.
 
-## 5.5 Reference Counting Corruption in Python FFI
+## 4.5 Reference Counting Corruption in Python FFI
 
 Python's reference counting system tracks object lifetimes by incrementing and decrementing reference counts as objects are created, passed between functions, and destroyed. This system assumes that object lifecycles follow predictable patterns.
 
@@ -104,7 +104,7 @@ Systematic discovery requires AFL++ harnesses that validate Python reference cou
 
 *Reference counting corruption demonstrates how native failures propagate into managed language internals.* The final FFI vulnerability class involves scenarios where native crashes completely bypass the exception handling that applications depend on for stability.
 
-## 5.6 Exception Handling Bypass Vulnerabilities
+## 4.6 Exception Handling Bypass Vulnerabilities
 
 Managed languages rely on structured exception handling to maintain application stability when errors occur. Python applications expect that native library calls will either complete successfully or raise predictable exceptions that can be caught and handled appropriately. Java applications depend on the JVM's exception mechanism to maintain system integrity even when native operations fail.
 
@@ -120,7 +120,7 @@ Exception handling bypass vulnerabilities require specialized testing approaches
 
 *Exception handling bypasses the complete catalog of FFI-specific vulnerability classes.* Now you need systematic approaches for detecting and correlating these diverse failure modes across different FFI contexts.
 
-## 5.7 Cross-Boundary Crash Detection and Correlation
+## 4.7 Cross-Boundary Crash Detection and Correlation
 
 FFI vulnerability discovery generates multiple types of crashes with different manifestation patterns: immediate native crashes, delayed managed language failures, garbage collection corruption, and exception handling bypasses. You need systematic approaches for correlating these diverse failure modes with specific AFL++ inputs and vulnerability triggers.
 
@@ -134,7 +134,7 @@ Memory corruption detection patterns for FFI testing follow predictable sequence
 
 *Cross-boundary correlation transforms chaotic FFI crashes into systematic vulnerability intelligence.* But discovering these vulnerabilities requires specialized testing approaches that account for managed language runtime complexity.
 
-## 5.8 Advanced FFI Testing Techniques
+## 4.8 Advanced FFI Testing Techniques
 
 Standard AFL++ harnesses test native libraries in isolation, but FFI-specific vulnerabilities require testing approaches that account for managed language runtime behavior, garbage collection timing, threading coordination, and exception handling consistency. You need specialized harnesses that can trigger the complex interaction patterns where FFI vulnerabilities hide.
 
@@ -150,7 +150,7 @@ Multi-dimensional coverage tracking enables systematic exploration of the FFI in
 
 *Advanced techniques enable comprehensive FFI vulnerability discovery that accounts for the full complexity of cross-language interactions.* These specialized approaches reveal vulnerability classes that traditional native fuzzing cannot detect.
 
-## 5.9 Conclusion
+## 4.9 Conclusion
 
 You've discovered an entirely new category of vulnerabilities that exist only at the boundaries between managed and native code. Starting with validation that Chapter 1's CVE-2015-8895 behaves differently through language bindings, you systematically uncovered four distinct FFI-specific vulnerability classes that traditional native code fuzzing cannot detect.
 

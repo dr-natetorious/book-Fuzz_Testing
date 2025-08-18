@@ -1,4 +1,4 @@
-# Chapter 7: JavaScript Service Reliability with Jazzer.js
+# JavaScript Service Reliability with Jazzer.js
 
 *Applying libFuzzer techniques from Chapter 2 to discover bugs in your chat application code*
 

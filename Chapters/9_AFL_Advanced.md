@@ -1,4 +1,4 @@
-# Chapter 9: Complex Input Format Fuzzing - Grammar and Structure Solutions
+# Complex Input Format Fuzzing - Grammar and Structure Solutions
 
 *Discovering vulnerabilities in applications that parse complex, structured inputs requiring semantic validity while maintaining comprehensive vulnerability discovery*
 
@@ -12,7 +12,7 @@ This chapter teaches structure-aware fuzzing that solves the complex format chal
 
 Complex format vulnerabilities represent critical attack vectors in modern web applications. Every image upload feature, document conversion service, and API endpoint that processes JSON or XML creates attack surfaces where grammar-based fuzzing discovers vulnerabilities that traditional techniques miss entirely.
 
-## 9.1 The Structured Input Challenge
+## 3.1 The Structured Input Challenge
 
 Random mutation fails catastrophically on structured input formats. Why? Semantic validity requirements create a massive rejection surface.
 
@@ -40,7 +40,7 @@ This requires valid SVG root elements, proper XML namespace declarations, and sp
 
 *With the core challenge understood, you're ready to build systematic solutions that maintain format validity while maximizing vulnerability discovery.*
 
-## 9.2 Grammar-Based Fuzzing for SVG and Complex Formats
+## 3.2 Grammar-Based Fuzzing for SVG and Complex Formats
 
 Grammar-based fuzzing solves the structured input challenge by generating inputs that conform to format specifications while exploring the parameter space that triggers vulnerabilities. For CVE-2016-3715 file deletion attacks, you need a valid SVG with `ephemeral:` protocol syntax:
 
@@ -60,7 +60,7 @@ Grammar rules enable systematic exploration of vulnerability surfaces that rando
 
 Building practical grammars requires understanding both the format specification and the target application's parsing behavior. ImageMagick's SVG processor supports extensions beyond standard SVG: custom protocols, embedded scripts, and delegate system integration. Your grammar rules must account for these implementation-specific features to discover vulnerabilities that only exist in ImageMagick's processing logic.
 
-## 9.3 Structure-Aware Mutation Strategies
+## 3.3 Structure-Aware Mutation Strategies
 
 Grammar-based generation produces valid inputs, but what about edge cases? Structure-aware mutation enables systematic exploration of malformed inputs that can trigger parsing vulnerabilities—without destroying everything.
 
@@ -80,7 +80,7 @@ Want to get sophisticated? Advanced structure-aware mutation tackles cross-forma
 
 *With both generation and mutation strategies mastered, you're ready to tackle ImageMagick's delegate system—where the most critical ImageTragick vulnerabilities lurk.*
 
-## 9.4 Custom Protocol and Delegate Fuzzing
+## 3.4 Custom Protocol and Delegate Fuzzing
 
 ImageMagick's delegate system processes complex formats through external programs and custom protocol handlers—exactly where the ImageTragick vulnerabilities hide. 
 
@@ -100,7 +100,7 @@ Understanding ImageMagick's delegate configuration files becomes crucial for com
 
 *Protocol-specific testing provides the precision needed for ImageTragick discovery, but modern applications often process multiple formats through the same pipeline—requiring multi-format attack surface exploration.*
 
-## 9.5 Multi-Format Attack Surface Discovery
+## 3.5 Multi-Format Attack Surface Discovery
 
 Modern applications often process multiple complex formats through the same processing pipeline. ImageMagick supports over 200 file formats, each with unique parsing logic and potential vulnerability surfaces. The challenge? Testing hundreds of format combinations without getting overwhelmed by complexity.
 
@@ -114,7 +114,7 @@ The systematic approach you develop for ImageMagick format fuzzing applies broad
 
 *Multi-format testing scales your discovery capabilities, but performance optimization ensures your structured fuzzing campaigns complete in reasonable timeframes.*
 
-## 9.6 Performance Optimization for Complex Format Fuzzing
+## 3.6 Performance Optimization for Complex Format Fuzzing
 
 Complex format fuzzing faces significant performance challenges compared to binary fuzzing. Grammar validation, semantic analysis, and format parsing create bottlenecks that limit throughput. The solution? Persistent mode becomes critical because SVG parsing overhead dominates execution time compared to simple binary processing.
 
@@ -126,7 +126,7 @@ Corpus quality requires balancing structural diversity with file size constraint
 
 *Performance optimization enables practical structured fuzzing, but real-world applications often require application-specific format extensions that go beyond standard specifications.*
 
-## 9.7 Advanced Grammar Integration Techniques
+## 3.7 Advanced Grammar Integration Techniques
 
 Standard SVG specifications? That's just the beginning. Real-world applications process complex formats with application-specific extensions that go way beyond anything you'll find in official documentation.
 
@@ -144,7 +144,7 @@ Browsers processing HTML/CSS have vendor-specific extensions. Document viewers h
 
 *Advanced grammar techniques maximize discovery effectiveness, but you need to understand how these structured format vulnerabilities affect production applications.*
 
-## 9.8 Conclusion
+## 3.8 Conclusion
 
 You've solved one of fuzzing's most challenging problems: discovering vulnerabilities in applications that require structured, semantically valid inputs. Starting with the limitation that random AFL++ fails on complex formats, you systematically developed grammar-based and structure-aware techniques that maintain input validity while exploring vulnerability surfaces.
 

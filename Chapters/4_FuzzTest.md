@@ -1,4 +1,4 @@
-# Chapter 4: Advanced Reliability Techniques
+# Advanced Reliability Techniques
 
 *When Your Service Passes All Crash Tests But Still Fails Customers*
 

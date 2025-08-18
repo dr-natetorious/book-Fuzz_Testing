@@ -1,4 +1,4 @@
-# Chapter 1: AFL++ for Binary and Native Application Security
+# AFL++ for Binary and Native Application Security
 
 *Discovering your first vulnerability using coverage-guided fuzzing and understanding how native code crashes affect modern application architectures*
 
@@ -12,7 +12,7 @@ Modern applications rarely call ImageMagick directly. They use Python libraries 
 
 Your systematic AFL++ workflow—harnessing development, corpus curation, and crash analysis—directly transfers to testing your applications. The skills you develop for finding ImageMagick vulnerabilities apply to any parser, any input handler, any component that processes untrusted data.
 
-## 1.1 Setting Up Your First Vulnerability Discovery Environment
+## 2.1 Setting Up Your First Vulnerability Discovery Environment
 
 AFL++ excels at finding memory corruption vulnerabilities in applications that parse complex file formats. ImageMagick provides an ideal learning target because it processes dozens of image formats, has a documented history of security issues, and represents the type of native library commonly called through language bindings in production systems.
 
@@ -26,7 +26,7 @@ You'll systematically discover three classes of vulnerabilities that represent c
 
 [PLACEHOLDER: CODE Vulnerable ImageMagick Target. Compilation instructions and configuration for ImageMagick 6.9.3-8 with specific vulnerable coders enabled, including BMP, TIFF, and SVG processors. Medium priority. Include proper debugging symbol configuration and AddressSanitizer integration for enhanced crash detection.]
 
-## 1.2 Creating Your First AFL++ Harness
+## 2.2 Creating Your First AFL++ Harness
 
 AFL++ harnesses transform your target application into a systematic vulnerability discovery platform. The harness defines how fuzzer-generated input reaches vulnerable code paths, making the difference between finding critical security bugs and wasting computation on irrelevant code exploration.
 
@@ -42,7 +42,7 @@ Persistent mode optimization enables AFL++ to test thousands of inputs per secon
 
 **With your harness complete, you're ready to feed it the diverse inputs that will guide AFL++ toward vulnerable code paths.** The quality of these initial seeds determines how effectively your fuzzing campaign explores ImageMagick's attack surface.
 
-## 1.3 Building Effective Seed Corpora for Maximum Coverage
+## 2.3 Building Effective Seed Corpora for Maximum Coverage
 
 Seed corpus quality dramatically influences AFL++ effectiveness. Well-chosen seeds provide comprehensive code coverage while maintaining reasonable file sizes for efficient mutation. Poor corpus selection limits exploration to shallow code paths, missing deep vulnerabilities in complex parsing logic.
 
@@ -56,7 +56,7 @@ You'll learn corpus optimization techniques that maximize coverage while maintai
 
 Coverage analysis ensures your seed corpus exercises diverse code paths through ImageMagick's parsing logic. Areas that never execute during corpus processing remain unexplored during fuzzing, potentially hiding critical vulnerabilities in unexercised code regions. This feedback enables iterative corpus improvement through targeted seed selection.
 
-## 1.4 Systematic Crash Analysis and Vulnerability Assessment
+## 2.4 Systematic Crash Analysis and Vulnerability Assessment
 
 AFL++ crash discovery is just the beginning. Understanding what went wrong, why it happened, and how it impacts application security requires systematic analysis that distinguishes critical vulnerabilities from theoretical issues with minimal practical impact.
 
@@ -70,7 +70,7 @@ Root cause analysis traces crashes back to their underlying programming errors, 
 
 [PLACEHOLDER: COMMAND Crash Reproduction and Debugging. Complete workflow for reproducing AFL++ discovered crashes with GDB integration, AddressSanitizer analysis, and crash classification procedures. High priority. Include techniques for distinguishing security-relevant crashes from implementation bugs.]
 
-## 1.5 Understanding Cross-Language Impact
+## 2.5 Understanding Cross-Language Impact
 
 The vulnerabilities you discover in ImageMagick rarely affect standalone command-line usage. Here's the reality: modern production systems call ImageMagick through Python web frameworks, Java application servers, or Node.js services that process user-uploaded images. How native code vulnerabilities behave in these environments determines their real-world impact.
 
@@ -84,7 +84,7 @@ Heap corruption vulnerabilities like CVE-2014-8354 can bypass managed language s
 
 *With crash analysis mastered and cross-language impacts understood, you're ready to tackle advanced vulnerability discovery techniques.* The foundation you've built supports sophisticated approaches that address AFL++'s limitations with structured inputs and language boundaries.
 
-## 1.6 Preparing for Advanced Techniques
+## 2.6 Preparing for Advanced Techniques
 
 This chapter focused on discovering memory corruption vulnerabilities in native applications. Real-world security testing requires additional techniques to uncover the full spectrum of threats: complex input format fuzzing and cross-language boundary testing.
 
@@ -100,7 +100,7 @@ Understanding how to discover memory corruption in ImageMagick systematically pr
 
 *Your next challenge: extending these proven techniques to solve the complex format problem that traditional fuzzing cannot handle.*
 
-## 1.7 Conclusion
+## 2.7 Conclusion
 
 You've transformed from manual testing to systematic vulnerability discovery in a single chapter. Starting with no AFL++ experience, you built effective harnesses and curated seed corpora. You discovered three real memory corruption vulnerabilities: CVE-2015-8895, an integer overflow in icon processing; CVE-2014-8354, a heap overflow in resize operations; and CVE-2014-8562, an out-of-bounds read in DCM parsing.
 
